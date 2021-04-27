@@ -7,7 +7,7 @@
 #include "Geometry.h"
 #include "ReadOFFfile.h"
 
-typedef struct player{
+typedef struct playerObj{
     Object3D charObj;
     Point3D CoM;
     float charHieght;
@@ -17,77 +17,76 @@ typedef struct player{
     Object3D pad;
     Point3D handleCoM;
     Point3D padCoM;
-}player;
+}playerObj;
 
+playerObj playerA;
+playerObj playerB;
 
-void readCapsule(Object3D *obj)
+float movementSpeed = 20.0f;
+
+void movePlayerB(unsigned char key, int x, int y)
 {
-    //char fileName[] = "objects/CapsuleV2.OFF";
+    if(key == 'w' || key == 'W') moveForward(&playerB);
 
-    ReadOFFfile("objects/CapsuleV2.OFF", &obj);
+    if(key == 'a' || key == 'A') moveLeft(&playerB);
+
+    if(key == 's' || key == 'S') moveBack(&playerB);
+
+    if(key == 'd' || key == 'D') moveRight(&playerB);
+
+        //play hit animation
+    if(key == 'f' || key == 'F'){}
+
+    if(key =='q' || key == 'Q') exit(0);
+    glutPostRedisplay();
 }
 
-void readBone(Object3D *obj)
+void movePlayerA(int key, int x, int y)
 {
-    //char fileName[] = "objects/bone.OFF";
+    switch (key) {
+		case GLUT_KEY_UP:
+            moveForward(&playerA);
+		    break;
+		case GLUT_KEY_LEFT:
+		    moveLeft(&playerA);
+		    break;
+		case GLUT_KEY_DOWN:
+            moveBack(&playerA);
+		    break;
+		case GLUT_KEY_RIGHT:
+		    moveRight(&playerA);
+		    break;
+        //hit key for player A
+	}
 
-    ReadOFFfile("objects/bone.OFF", &obj);
-    printf("read");
+	glutPostRedisplay();
 }
 
-void readRacket_Zeroed(Object3D *obj)
+void moveForward(playerObj *obj)
 {
-    //char fileName[] = "objects/Racket_Zeroed.OFF";
-
-    ReadOFFfile("objects/Racket_Zeroed.OFF", &obj);
+    translate3DObject(&playerA.charObj, 0, 0, -movementSpeed);
+    translate3DObject(&playerA.handle, 0, 0, -movementSpeed);
+    translate3DObject(&playerA.pad, 0, 0, -movementSpeed);
 }
 
-void readRacket_Posed(Object3D *obj)
+void moveBack(playerObj *obj)
 {
-    //char fileName[] = "objects/Racket_Posed.OFF";
-
-    ReadOFFfile("objects/Racket_Posed.OFF", &obj);
+    translate3DObject(&playerA.charObj, 0, 0, movementSpeed);
+    translate3DObject(&playerA.handle, 0, 0, movementSpeed);
+    translate3DObject(&playerA.pad, 0, 0, movementSpeed);
 }
 
-/*
-void drawReadObject(Object3D obj)
+void moveLeft(playerObj *obj)
 {
-    int i;
-    for(i = 0; i < obj.nfaces; ++i)
-    {
-        Face3D f;
-
-        f.x = obj.faces[i].x;
-        f.y = obj.faces[i].y;
-        f.z = obj.faces[i].z;
-
-        glBegin(GL_TRIANGLES);
-            glVertex3f(obj.vertices[f.x].x, obj.vertices[f.x].y, obj.vertices[f.x].z);
-            glVertex3f(obj.vertices[f.y].x, obj.vertices[f.y].y, obj.vertices[f.y].z);
-            glVertex3f(obj.vertices[f.z].x, obj.vertices[f.z].y, obj.vertices[f.z].z);
-        glEnd();
-    }
+    translate3DObject(&playerA.charObj, -movementSpeed, 0,0);
+    translate3DObject(&playerA.handle, -movementSpeed, 0,0);
+    translate3DObject(&playerA.pad, -movementSpeed, 0,0);
 }
-*/
-/*
-void myinit(void){
- // attributes
- glEnable(GL_DEPTH_TEST);
- glClearColor(0.0, 0.0, 0.0, 0.0); // draw on white background
- glLineWidth(5.0); // draw using lines 5 pixels wide
 
- // switch matrix mode to 'projection' and
- //load an identity matrix as the projection matrix
- glMatrixMode(GL_PROJECTION);
- glLoadIdentity();
-
-        GLdouble fov	 = 60;		// degrees
-        GLdouble aspect	 = 1;		// aspect ratio aspect = height/width
-        GLdouble nearVal = 0.5;
-        GLdouble farVal  = 100;     // near and far clipping planes
-        gluPerspective(fov, aspect, nearVal, farVal);
- // switch matrix mode back to 'model view'
- glMatrixMode(GL_MODELVIEW);
-}*/
-
+void moveRight(playerObj *obj)
+{
+    translate3DObject(&playerA.charObj, movementSpeed, 0,0);
+    translate3DObject(&playerA.handle, movementSpeed, 0,0);
+    translate3DObject(&playerA.pad, movementSpeed, 0,0);
+}
 #endif // PLAYER_H

@@ -8,15 +8,9 @@
 #include <GL/freeglut.h>
 #include <GL/glut.h>
 
-char fileName[];//blank array to allow for multiple characters
-GLfloat centerOfMass[3] = {0,0,0};
-float boundingRadius = 0;
-
-typedef GLfloat point3[3];
 static GLdouble viewer[]= {50.0, 10.0, 80.0, // initial camera location (across, up/down, distance to object)
                            0.0, 0.0, 0.0, // initial look at point
                            0.0, 1.0, 0.0};  // initial  upvector
- player playerA;
 
 void myinit(void){
  /* attributes */
@@ -30,19 +24,7 @@ void myinit(void){
  glMatrixMode(GL_PROJECTION);
  glLoadIdentity();
 
-   /* GLdouble left = -100;
-    GLdouble right= 100;
-    GLdouble bottom = -100;
-    GLdouble top    = 100;
-    GLdouble nearVal = 0.1;
-    GLdouble farVal  = 1000;     // near and far clipping planes
-*/
- /* set up an orthographic projection in 2D with a clipping
- rectangle which has its lower left corner at the origin (0.0,0.0) */
-  /*  glOrtho(left,  right, bottom,  top,
-            nearVal,  farVal);//*/
-
-            GLdouble fov	 = 80;		// degrees
+        GLdouble fov	 = 80;		// degrees
         GLdouble aspect	 = 1;		// aspect ratio aspect = height/width
         GLdouble nearVal = 0.1;
         GLdouble farVal  = 1000;     // near and far clipping planes
@@ -52,7 +34,7 @@ void myinit(void){
 }
 
 void drawAxis(){
-    point3 axisVerts[4] = {{0.0, 0.0, 0.0},
+    Point3D axisVerts[4] = {{0.0, 0.0, 0.0},
                           {500.0, 0.0, 0.0},
                           {0.0, 500.0, 0.0},
                           {0.0, 0.0, 500.0}};
@@ -92,11 +74,10 @@ void draw3DObject(Object3D obj){
 
         glEnd();
     }
-
         //translateObject3D(&obj, &centerOfMass); //moves object to 0,0,0
 }
 
-
+/*
 void keys(unsigned char key, int x, int y)
 {
     if(key == 'x'){
@@ -114,7 +95,7 @@ void keys(unsigned char key, int x, int y)
 
     glutPostRedisplay();
 }
-
+*/
 
 
 void display(void){
@@ -141,53 +122,30 @@ void display(void){
  glFlush(); /* flush buffers */
 }
 
-void translateObject3D(Object3D *obj, GLfloat *CoM)
-{
-
-    for(int i = 0; i < obj->nverts; i++)
-    {
-        obj->vertices[i][0] -= CoM[0];
-        obj->vertices[i][1] -= CoM[1];
-        obj->vertices[i][2] -= CoM[2];
-    }
-}
-void calcCenterOfMass(Object3D obj){
-
-    for(int i = 0; i < obj.nverts; ++i)
-    {
-        centerOfMass[0] += obj.vertices[i][0];
-        centerOfMass[1] += obj.vertices[i][1];
-        centerOfMass[2] += obj.vertices[i][2];
-    }
-
-    centerOfMass[0] /= obj.nverts;
-    centerOfMass[1] /= obj.nverts;
-    centerOfMass[2] /= obj.nverts;
-}
 void read3DObjects()
 {
+        //Read all objects for player ONE
     ReadOFFfile("objects/Capsule.off", &playerA.charObj);
     ReadOFFfile("objects/Racket_Handle.off", &playerA.handle);
     ReadOFFfile("objects/Racket_Pad.off", &playerA.pad);
 }
 
 int main(int argc, char** argv) {
+    read3DObjects();
 
-read3DObjects();
- //ReadOFFfile("objects/CapsuleV2.off", &myBone);
- //calcCenterOfMass(playerA.charObj);
- glutInit(&argc,argv); /* Standard GLUT initialization */
+    glutInit(&argc,argv); /* Standard GLUT initialization */
 
- glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB  | GLUT_DEPTH); //(GLUT_SINGLE|GLUT_RGB);
- glutInitWindowSize(600,600); /* 500 x 500 pixel window */
- glutInitWindowPosition(0,0); /* place window top left on display */
- glutCreateWindow("Draw complex 3D object"); /* window title */
+    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB  | GLUT_DEPTH); //(GLUT_SINGLE|GLUT_RGB);
+    glutInitWindowSize(600,600); /* 500 x 500 pixel window */
+    glutInitWindowPosition(0,0); /* place window top left on display */
+    glutCreateWindow("Draw complex 3D object"); /* window title */
 
- myinit(); /* set attributes */
- glutDisplayFunc(display); /* display callback invoked when window is opened */
+    myinit(); /* set attributes */
+    glutDisplayFunc(display); /* display callback invoked when window is opened */
 
- glutKeyboardFunc(keys);
- glutMainLoop(); /* enter event loop */
+    glutSpecialFunc(movePlayerA);
+    //glutKeyboardFunc(movePlayerB);
+    glutMainLoop(); /* enter event loop */
 
  return 0;
 }
