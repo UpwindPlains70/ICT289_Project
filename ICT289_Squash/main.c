@@ -4,6 +4,8 @@
 #include "include/Geometry.h"
 #include "include/ReadOFFfile.h"
 #include "include/player.h"
+#include "include/Room.h"
+#include "include/collisionDetectionAABB.h"
 
 #include <GL/freeglut.h>
 #include <GL/glut.h>
@@ -77,7 +79,7 @@ void draw3DObject(Object3D obj){
         //translateObject3D(&obj, &centerOfMass); //moves object to 0,0,0
 }
 
-/*
+
 void keys(unsigned char key, int x, int y)
 {
     if(key == 'x'){
@@ -95,7 +97,7 @@ void keys(unsigned char key, int x, int y)
 
     glutPostRedisplay();
 }
-*/
+
 
 
 void display(void){
@@ -110,8 +112,11 @@ void display(void){
 
   drawAxis();
 
+    drawCourt();
         //Draw player (Capsule)
-    glScaled(0.05,0.05,0.05);
+
+    glColor3f(0.4, 0.1, 0.1);
+    glScaled(0.02,0.02,0.02);
     draw3DObject(playerA.charObj);
         //Draw racket
     glColor3f(0.6, 0.2, 0.2);
@@ -144,7 +149,7 @@ int main(int argc, char** argv) {
     glutDisplayFunc(display); /* display callback invoked when window is opened */
 
     glutSpecialFunc(movePlayerA);
-    //glutKeyboardFunc(movePlayerB);
+    glutKeyboardFunc(keys);
     glutMainLoop(); /* enter event loop */
 
  return 0;
