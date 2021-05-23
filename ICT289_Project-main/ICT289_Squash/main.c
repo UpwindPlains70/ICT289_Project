@@ -13,8 +13,8 @@
 #define TIMER 10
 
 
-static GLdouble viewer[]= {50.0, 10.0, 40.0, // initial camera location (across, up/down, distance to object)
-                           50.0, 10.0, 1.0, // initial look at point
+static GLdouble viewer[]= {110.0, 40.0, -32.0, // initial camera location (across, up/down, distance to object)
+                           0.0, 20.0, -32.0, // initial look at point
                            0.0, 1.0, 0.0};  // initial  upvector
 
 void myinit(void){
@@ -150,8 +150,8 @@ void display(void){
     playerColours[0][0] = 1.0; // 0 to access colour profile for first character, then 0 to access Red float value
     playerColours[0][1] = 0.0;
     playerColours[0][2] = 0.0;
-    glTranslatef(80.0, 2.0 * playerArray[0].charHieght , -10.0); /// starting location of player1
-    glRotatef(90.0,0.0,1.0,0.0); /// two players start facing each other
+    glTranslatef(65.0, 2.0 * playerArray[0].charHieght , -10.0); /// starting location of player1
+    //glRotatef(90.0,0.0,1.0,0.0); /// two players start facing each other
     drawPlayer(0, playerColours[0]);          // passing index for player1, first element of player array and Array of a 3 element RGB array
     drawRacket(0);
 
@@ -162,8 +162,8 @@ void display(void){
     playerColours[1][0] = 0.0;
     playerColours[1][1] = 1.0;
     playerColours[1][2] = 0.0;
-    glTranslatef(80.0, 2.0 * playerArray[1].charHieght , -40.0); /// starting location of player2
-    glRotatef(90.0,0.0,1.0,0.0);
+    glTranslatef(65.0, 2.0 * playerArray[1].charHieght , -55.0); /// starting location of player2
+    //glRotatef(90.0,0.0,1.0,0.0);
     drawPlayer(1, playerColours[1]); // passing index for player1, second element of player array
     drawRacket(1);
 
@@ -184,10 +184,6 @@ void read3DObjects()
         calcCenterOfMass(playerArray[i].charObj, playerArray[i].CoM ); /// added this each players COM
         getMaxMin(playerArray[i].charObj, ma1, mi1); /// so far only used this so I can get the players height
         playerArray[i].charHieght = maxYFloat - minYFloat;
-
-
-
-
 
     }
 }

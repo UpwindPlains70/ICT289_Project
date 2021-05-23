@@ -107,3 +107,37 @@
 	<GL/freeglut.h>
 	"Geometry.h"
 
+1621758512 source:c:\users\peter\documents\github\ict289_project\ict289_project-main\ict289_squash\main.c
+	<stdio.h>
+	<stdlib.h>
+	"include/Geometry.h"
+	"include/ReadOFFfile.h"
+	"include/player.h"
+	"include/Room.h"
+	"include/collisionDetectionAABB.h"
+	<GL/freeglut.h>
+	<GL/glut.h>
+
+1621757554 c:\users\peter\documents\github\ict289_project\ict289_project-main\ict289_squash\include\geometry.h
+	<math.h>
+	<GL/freeglut.h>
+	<GL/glut.h>
+
+1621757554 c:\users\peter\documents\github\ict289_project\ict289_project-main\ict289_squash\include\readofffile.h
+	<stdio.h>
+	<stdlib.h>
+	"Geometry.h"
+
+1621757554 c:\users\peter\documents\github\ict289_project\ict289_project-main\ict289_squash\include\player.h
+	<GL/freeglut.h>
+	<GL/glut.h>
+	"Geometry.h"
+	"ReadOFFfile.h"
+
+1621757554 c:\users\peter\documents\github\ict289_project\ict289_project-main\ict289_squash\include\room.h
+	"Geometry.h"
+
+1621757554 c:\users\peter\documents\github\ict289_project\ict289_project-main\ict289_squash\include\collisiondetectionaabb.h
+	<GL/freeglut.h>
+	"Geometry.h"
+
