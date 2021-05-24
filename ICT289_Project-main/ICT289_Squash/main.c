@@ -151,7 +151,7 @@ void display(void){
     playerColours[0][1] = 0.0;
     playerColours[0][2] = 0.0;
     glTranslatef(65.0, 2.0 * playerArray[0].charHieght , -10.0); /// starting location of player1
-    //glRotatef(90.0,0.0,1.0,0.0); /// two players start facing each other
+    glRotatef(90.0,0.0,1.0,0.0); /// two players start facing each other
     drawPlayer(0, playerColours[0]);          // passing index for player1, first element of player array and Array of a 3 element RGB array
     drawRacket(0);
 
@@ -163,7 +163,7 @@ void display(void){
     playerColours[1][1] = 1.0;
     playerColours[1][2] = 0.0;
     glTranslatef(65.0, 2.0 * playerArray[1].charHieght , -55.0); /// starting location of player2
-    //glRotatef(90.0,0.0,1.0,0.0);
+    glRotatef(90.0,0.0,1.0,0.0);
     drawPlayer(1, playerColours[1]); // passing index for player1, second element of player array
     drawRacket(1);
 
