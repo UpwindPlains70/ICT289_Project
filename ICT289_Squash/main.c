@@ -6,12 +6,13 @@
 #include "include/player.h"
 #include "include/Room.h"
 #include "include/collisionDetectionAABB.h"
+#include "include/scoreDisplay.h"
 
 #include <GL/freeglut.h>
 #include <GL/glut.h>
 
-static GLdouble viewer[]= {50.0, 10.0, 80.0, // initial camera location (across, up/down, distance to object)
-                           0.0, 0.0, 0.0, // initial look at point
+static GLdouble viewer[]= {110.0, 40.0, -32.0, // initial camera location (across, up/down, distance to object)
+                           0.0, 20.0, -32.0, // initial look at point
                            0.0, 1.0, 0.0};  // initial  upvector
 
 void myinit(void){
@@ -111,10 +112,11 @@ void display(void){
            viewer[6], viewer[7], viewer[8]);
 
   drawAxis();
-
+WriteCaptions();
     drawCourt();
         //Draw player (Capsule)
 
+    glTranslatef(80.0, 0, -40.0);
     glColor3f(0.4, 0.1, 0.1);
     glScaled(0.02,0.02,0.02);
     draw3DObject(playerA.charObj);

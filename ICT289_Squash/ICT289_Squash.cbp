@@ -38,6 +38,7 @@
 		<Unit filename="include/Room.h" />
 		<Unit filename="include/collisionDetectionAABB.h" />
 		<Unit filename="include/player.h" />
+		<Unit filename="include/scoreDisplay.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>

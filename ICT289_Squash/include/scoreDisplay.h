@@ -19,16 +19,16 @@ void WriteCaptions(void)
     //////find a good location for scores
     //player 1
     ////2d location
-    //glRasterPos2i(154, 20);
+    //glRasterPos2i(80, 20);
     ////3dlocation
-    glRasterPos3i(154, 20,0);
+    glRasterPos3i(0, 40,-26);
     glutBitmapCharacter(GLUT_BITMAP_9_BY_15, p1);
 
     //player 2
     ////2d location
     //glRasterPos2i(514, 20);
     ////3dlocation
-    glRasterPos3i(514, 20,0);
+    glRasterPos3i(0, 40,-38);
     glutBitmapCharacter(GLUT_BITMAP_9_BY_15, p2);
 }
 
