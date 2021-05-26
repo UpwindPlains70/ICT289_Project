@@ -6,6 +6,7 @@
 #include "include/player.h"
 #include "include/Room.h"
 #include "include/collisionDetectionAABB.h"
+#include "include/scoreDisplay.h"
 
 #include <GL/freeglut.h>
 #include <GL/glut.h>
@@ -50,6 +51,7 @@ void drawPlayer(int i, GLdouble colour[]){
 void drawRacket(int i){
 
  //Draw racket
+    //glRotatef(90, 0, 1,0);
     glColor3f(0.6, 0.2, 0.2);
     draw3DObject(playerArray[i].handle);
     glColor3f(0.7,0.7,0.7);
@@ -101,27 +103,6 @@ void draw3DObject(Object3D obj){
         //translateObject3D(&obj, &centerOfMass); //moves object to 0,0,0
 }
 
-
-void keys(unsigned char key, int x, int y) /// moving the camera
-{
-    if(key == 'x'){
-        viewer[0] -= 1;
-    }
-    if(key == 'X'){
-            viewer[0] += 1;
-    }
-    if(key == 'y') viewer[1] -= 1;
-    if(key == 'Y') viewer[1] += 1;
-    if(key == 'z') viewer[2] -= 1;
-    if(key == 'Z') viewer[2] += 1;
-
-    if(key == 'q' || key == 'Q') exit(0);
-
-    glutPostRedisplay();
-}
-
-
-
 void display(void){
  /* declare a point data type */
  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -132,9 +113,10 @@ void display(void){
            viewer[3], viewer[4], viewer[5],
            viewer[6], viewer[7], viewer[8]);
 
-  drawAxis();
+  //drawAxis();
 
     drawCourt();
+    WriteCaptions();
     currTime = glutGet(GLUT_ELAPSED_TIME) / 1000.0;
     timeSincePrevFrame = currTime - prevTime;
     //glutTimerFunc(TIMER,movePlayerA, 0); // this function is called every TIMER ms
@@ -150,8 +132,9 @@ void display(void){
     playerColours[0][0] = 1.0; // 0 to access colour profile for first character, then 0 to access Red float value
     playerColours[0][1] = 0.0;
     playerColours[0][2] = 0.0;
-    glTranslatef(65.0, 2.0 * playerArray[0].charHieght , -10.0); /// starting location of player1
-    glRotatef(90.0,0.0,1.0,0.0); /// two players start facing each other
+    glTranslatef(77.0, 2.0 * playerArray[0].charHieght , -15.0); /// starting location of player1
+    glTranslatef(playerArray[0].CoM[0], playerArray[0].CoM[1], playerArray[0].CoM[2]); /// move player1 based on CoM
+    glRotatef(playerArray[0].currSwingAngle, 0, 1, 0);
     drawPlayer(0, playerColours[0]);          // passing index for player1, first element of player array and Array of a 3 element RGB array
     drawRacket(0);
 
@@ -162,8 +145,10 @@ void display(void){
     playerColours[1][0] = 0.0;
     playerColours[1][1] = 1.0;
     playerColours[1][2] = 0.0;
-    glTranslatef(65.0, 2.0 * playerArray[1].charHieght , -55.0); /// starting location of player2
-    glRotatef(90.0,0.0,1.0,0.0);
+        //NEED TO COMPENSATE FOR CoM TRANSLATE
+    glTranslatef(77.0, 2.0 * playerArray[1].charHieght , -50.0); /// starting location of player2
+    glTranslatef(playerArray[1].CoM[0], playerArray[1].CoM[1], playerArray[1].CoM[2]); /// move player2 based on CoM
+    glRotatef(playerArray[1].currSwingAngle, 0, 1, 0);
     drawPlayer(1, playerColours[1]); // passing index for player1, second element of player array
     drawRacket(1);
 
@@ -187,8 +172,6 @@ void read3DObjects()
 
     }
 }
-
-void idle(){    glutPostRedisplay();}
 
 int main(int argc, char** argv) {
     read3DObjects();
