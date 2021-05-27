@@ -200,6 +200,7 @@ void pressedSpecialUp(int key, int x, int y){
 
 void pressedDown(unsigned char key, int x, int y)
 {
+    increaseP1Score();
     keyboardKeys[key] = TRUE;
     //glutPostRedisplay();
 }
@@ -224,6 +225,7 @@ void movePlayerA()
         //swing
     if(keyboardKeys[' '])
     {
+
         playerArray[0].swingMode = hit; //hitting
         glutTimerFunc(TIMERMSECS, playerOneSwing, 0);
     }

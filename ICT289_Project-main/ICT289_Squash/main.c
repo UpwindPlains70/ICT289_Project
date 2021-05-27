@@ -7,6 +7,7 @@
 #include "include/Room.h"
 #include "include/collisionDetectionAABB.h"
 #include "include/scoreDisplay.h"
+#include "include/menus.h"
 
 #include <GL/freeglut.h>
 #include <GL/glut.h>
@@ -17,6 +18,8 @@
 static GLdouble viewer[]= {110.0, 40.0, -32.0, // initial camera location (across, up/down, distance to object)
                            0.0, 20.0, -32.0, // initial look at point
                            0.0, 1.0, 0.0};  // initial  upvector
+
+
 
 void myinit(void){
  /* attributes */
@@ -174,6 +177,8 @@ void read3DObjects()
 }
 
 int main(int argc, char** argv) {
+    printf("Welcome to 'Squash Simulator'\n\n");
+    printf("Right click game window for menu\n");
     read3DObjects();
 
     glutInit(&argc,argv); /* Standard GLUT initialization */
@@ -192,8 +197,9 @@ int main(int argc, char** argv) {
     glutKeyboardFunc(pressedDown);     /// this function for WASD movement, camera doesn't need to be manipulated by key press, camera can move by itself relative to the position of the ball maybe
     glutKeyboardUpFunc(pressedUp);
 
-     prevTime = glutGet(GLUT_ELAPSED_TIME) / 1000.f;
+    prevTime = glutGet(GLUT_ELAPSED_TIME) / 1000.f;
 
+    createMainMenu(); ///GLUT menus
     glutMainLoop(); /* enter event loop */
 
  return 0;
