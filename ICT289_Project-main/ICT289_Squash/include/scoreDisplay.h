@@ -7,7 +7,15 @@
 int plyr1Score = 0;
 int plyr2Score = 0;
 
-int maxScore = 5;
+typedef enum {p1, p2, none} winnerStates;
+
+int maxScore = 10;
+int minScore = 1;
+int defaultWinScore = 5;
+
+int winScore = 5;
+
+winnerStates gameWinner = none;
 
 void WriteCaptions(void)
 {
@@ -20,15 +28,11 @@ void WriteCaptions(void)
 
     //////find a good location for scores
     //player 1
-    ////2d location
-    //glRasterPos2i(80, 20);
     ////3dlocation
     glRasterPos3i(0, 40,-26);
     glutBitmapCharacter(GLUT_BITMAP_9_BY_15, p1);
 
     //player 2
-    ////2d location
-    //glRasterPos2i(514, 20);
     ////3dlocation
     glRasterPos3i(0, 40,-38);
     glutBitmapCharacter(GLUT_BITMAP_9_BY_15, p2);
@@ -36,28 +40,24 @@ void WriteCaptions(void)
 
 void increaseP1Score()
 {
-    if(plyr1Score+1 < maxScore)
+    if(plyr1Score+1 < winScore)
         plyr1Score++;
     else
     {   ///Game over P1 wins
         plyr1Score++;
-        printf("Player One Wins!!!\n");
-        printf("%d  to %d", plyr1Score, plyr2Score);
-newGame();
+        gameWinner = p1;
         ///Back to main menu
     }
 }
 
 void increaseP2Score()
 {
-    if(plyr1Score+1 < maxScore)
+    if(plyr1Score+1 < winScore)
         plyr2Score++;
     else
     {   ///Game over P2 wins
         plyr1Score++;
-        printf("Player One Wins!!!\n");
-        printf("%d  to %d", plyr1Score, plyr2Score);
-    newGame();
+        gameWinner = p2;
         ///Back to main menu
     }
 }
@@ -66,5 +66,22 @@ void newGame()
 {
     plyr1Score = 0;
     plyr2Score = 0;
+    gameWinner = none;
+}
+
+void increaseWinScore()
+{
+    if(winScore < maxScore)
+        winScore++;
+    else
+        printf("Score is at maximim: %d\n", maxScore);
+}
+
+void decreaseWinScore()
+{
+    if(winScore > minScore)
+        winScore--;
+    else
+        printf("Score is at minimum: %d\n", minScore);
 }
 #endif // SCOREDISPLAY_H_INCLUDED

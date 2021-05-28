@@ -6,6 +6,7 @@
 
 #include "Geometry.h"
 #include "ReadOFFfile.h"
+#include "ball.h" ///REMOVE IN FINAL
 
 typedef enum {reset, hit, idle} swingStates; ///animation control states for character swing
 
@@ -32,6 +33,10 @@ float startTime, prevTime;
 float currTime;
 float timeSincePrevFrame;
 
+float maxSpeedMod = 60; ///Allows for adjustable player speed
+float minSpeedMod = 30;
+float defaultSpeedMod = 40;
+
 float speedMod = 40; /// control the speed of all the movements
 
 BOOL keyboardKeys[256]; /// bool to know if a key is currently being pressed down or not, using this so both players can move at the same time
@@ -45,7 +50,12 @@ playerObj playerArray[2];
     ///Swing animation parameters
 #define TIMERMSECS 150 /// callback frequency
 int maxSwingAngle = 60; ///Max swing angle of players
-int swingSpeed = 80; ///speed of swing & reset
+
+float maxSwingSpeed = 100; ///Allows for adjustable game parameters
+float minSwingSpeed = 60;
+float defaultSwingSpeed = 80;
+
+float swingSpeed = 80; ///speed of swing & reset
 
     //Cannot be moved to another file due to circular reference
 void playerOneSwing(void){
@@ -201,6 +211,7 @@ void pressedSpecialUp(int key, int x, int y){
 void pressedDown(unsigned char key, int x, int y)
 {
     increaseP1Score();
+    changeBallColor();
     keyboardKeys[key] = TRUE;
     //glutPostRedisplay();
 }
@@ -250,5 +261,39 @@ void moveLeft(playerObj *obj)
 void moveRight(playerObj *obj)
 {
     obj->CoM[0] += timeSincePrevFrame * speedMod;
+}
+
+
+void increasePlayerSpeed()
+{
+    if(speedMod < maxSpeedMod)
+        speedMod++; ///Increase speed by one
+    else
+        printf("Player speed is at maximum: %f\n", speedMod);
+}
+
+void decreasePlayerSpeed()
+{
+    if(speedMod > minSpeedMod)
+        speedMod--; ///Increase speed by one
+    else
+        printf("Player speed is at minimum: %f\n", speedMod);
+}
+
+
+void increaseSwingSpeed()
+{
+    if(swingSpeed < maxSwingSpeed)
+        swingSpeed++;
+    else
+        printf("Swing speed is at maximum: %f\n", swingSpeed);
+}
+
+void decreaseSwingSpeed()
+{
+    if(swingSpeed > minSwingSpeed)
+        swingSpeed--;
+    else
+        printf("Swing speed is at minimum: %f\n", swingSpeed);
 }
 #endif // PLAYER_H
