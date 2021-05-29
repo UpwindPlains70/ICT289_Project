@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <GL/freeglut.h>
+#include <GL/glut.h>
 
 #include "include/Geometry.h"
 #include "include/ReadOFFfile.h"
@@ -10,8 +12,6 @@
 #include "include/menus.h"
 #include "include/ball.h"
 
-#include <GL/freeglut.h>
-#include <GL/glut.h>
 
 #define TIMER 10
 
@@ -20,7 +20,11 @@ static GLdouble viewer[]= {110.0, 40.0, -32.0, // initial camera location (acros
                            0.0, 20.0, -32.0, // initial look at point
                            0.0, 1.0, 0.0};  // initial  upvector
 
-
+    ///Perspective Camera specs
+GLdouble fov	 = 80;		// degrees
+GLdouble aspect	 = 1;		// aspect ratio aspect = height/width
+GLdouble nearVal = 0.1;
+GLdouble farVal  = 1000;     // near and far clipping planes
 
 void myinit(void){
  /* attributes */
@@ -34,18 +38,14 @@ void myinit(void){
  glMatrixMode(GL_PROJECTION);
  glLoadIdentity();
 
-        GLdouble fov	 = 80;		// degrees
-        GLdouble aspect	 = 1;		// aspect ratio aspect = height/width
-        GLdouble nearVal = 0.1;
-        GLdouble farVal  = 1000;     // near and far clipping planes
-        gluPerspective(fov, aspect, nearVal, farVal);//*/
+ gluPerspective(fov, aspect, nearVal, farVal);//*/
  /* switch matrix mode back to 'model view' */
  glMatrixMode(GL_MODELVIEW);
 }
 
-
 void drawPlayer(int i, GLdouble colour[]){
 //Draw player (Capsule)
+
     glColor3f(colour[0], colour[1], colour[2]);   // 0.4, 0.1, 0.1
     glScaled(0.02,0.02,0.02);
     draw3DObject(playerArray[i].charObj);
@@ -107,6 +107,16 @@ void draw3DObject(Object3D obj){
         //translateObject3D(&obj, &centerOfMass); //moves object to 0,0,0
 }
 
+void reshape (int w, int h){
+   glViewport (0, 0, (GLsizei) w, (GLsizei) h);
+   glMatrixMode (GL_PROJECTION);
+   glLoadIdentity ();
+   gluPerspective(fov, (GLfloat) w/(GLfloat) h, nearVal, farVal);
+   glMatrixMode(GL_MODELVIEW);
+   glLoadIdentity();
+   //gluLookAt (0.0, 0.0, 5.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+}
+
 void display(void){
  /* declare a point data type */
  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -152,9 +162,9 @@ void display(void){
 ///----------------------( drawing first character ) ------------------
     glPushMatrix();
     /// height and adding it to the Y as otherwise character is halfway into the ground
-        playerColours[0][0] = 1.0; // 0 to access colour profile for first character, then 0 to access Red float value
+        playerColours[0][0] = 0.0; // 0 to access colour profile for first character, then 0 to access Red float value
         playerColours[0][1] = 0.0;
-        playerColours[0][2] = 0.0;
+        playerColours[0][2] = 1.0;
         glTranslatef(77.0, 2.0 * playerArray[0].charHieght , -15.0); /// starting location of player1
         glTranslatef(playerArray[0].CoM[0], playerArray[0].CoM[1], playerArray[0].CoM[2]); /// move player1 based on CoM
         glRotatef(playerArray[0].currSwingAngle, 0, 1, 0);
@@ -178,11 +188,11 @@ void display(void){
     glPopMatrix();
 //-------------------------------------------------------------
 
- glFlush(); /* flush buffers */
+ //glFlush(); /* flush buffers */
+    glutSwapBuffers();
 }
 
-void read3DObjects()
-{
+void read3DObjects(){
         //changing to read in data into all playerObjects from an array
     for(int i = 0; i < 2; i++){
         ReadOFFfile("objects/Capsule.off", &playerArray[i].charObj);
@@ -212,6 +222,7 @@ int main(int argc, char** argv) {
     myinit(); /* set attributes */
     glutDisplayFunc(display); /* display callback invoked when window is opened */
 
+    glutReshapeFunc(reshape);  ///Re scale window (prevent dispreportioned world)
     //glutSpecialUpFunc(movePlayerA);
     glutSpecialFunc(pressedSpecialDown); /// this function for arrow key movement
     glutSpecialUpFunc(pressedSpecialUp);

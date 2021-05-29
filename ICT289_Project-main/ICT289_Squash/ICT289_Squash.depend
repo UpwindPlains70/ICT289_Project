@@ -107,9 +107,11 @@
 	<GL/freeglut.h>
 	"Geometry.h"
 
-1622173276 source:c:\users\peter\documents\github\ict289_project\ict289_project-main\ict289_squash\main.c
+1622262467 source:c:\users\peter\documents\github\ict289_project\ict289_project-main\ict289_squash\main.c
 	<stdio.h>
 	<stdlib.h>
+	<GL/freeglut.h>
+	<GL/glut.h>
 	"include/Geometry.h"
 	"include/ReadOFFfile.h"
 	"include/player.h"
@@ -118,8 +120,6 @@
 	"include/scoreDisplay.h"
 	"include/menus.h"
 	"include/ball.h"
-	<GL/freeglut.h>
-	<GL/glut.h>
 
 1621757554 c:\users\peter\documents\github\ict289_project\ict289_project-main\ict289_squash\include\geometry.h
 	<math.h>
@@ -152,7 +152,7 @@
 	<GL/glut.h>
 	"player.h"
 
-1622174462 c:\users\peter\documents\github\ict289_project\ict289_project-main\ict289_squash\include\menus.h
+1622174560 c:\users\peter\documents\github\ict289_project\ict289_project-main\ict289_squash\include\menus.h
 	<GL/freeglut.h>
 	<GL/glut.h>
 	"scoreDisplay.h"
