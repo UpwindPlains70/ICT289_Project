@@ -70,13 +70,16 @@ void writeHelpDisplay()
   drawString (label);
 
   sprintf (label, "--- Player One controls ---");
-  glRasterPos3i (12, 39,-14);
+  glRasterPos3i (12, 40,-14);
   drawString (label);
   sprintf (label, "Arrow keys = movement");
-  glRasterPos3i (12, 35,-16);
+  glRasterPos3i (12, 36,-16);
   drawString (label);
-  sprintf (label, "space bar = hit/swing");
-  glRasterPos3i (12, 31,-16);
+  sprintf (label, "space bar (hold) = increase power");
+  glRasterPos3i (12, 33,-12);
+  drawString (label);
+  sprintf (label, "space bar (release) = hit/swing");
+  glRasterPos3i (12, 30,-12);
   drawString (label);
 
   sprintf (label, "--- Player Two controls ---");
@@ -88,8 +91,11 @@ void writeHelpDisplay()
   sprintf (label, "(Forward, Left, Back, Right)");
   glRasterPos3i (12, 17,-16);
   drawString (label);
-  sprintf (label, "F = hit/swing");
+  sprintf (label, "F (hold) = increase power");
   glRasterPos3i (12, 13,-16);
+  drawString (label);
+  sprintf (label, "F (release) = hit/swing");
+  glRasterPos3i (12, 10,-16);
   drawString (label);
 }
 

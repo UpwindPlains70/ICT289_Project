@@ -147,11 +147,11 @@ Face3D UnitNormalVector(Face3D v1, Face3D v2)
     return normalVec;
 }
 
-void pointCopy(Point3D source, Point3D *dest)
+void pointCopy(Point3D source, Point3D dest)
 {
-    *dest[0] = source[0];
-    *dest[1] = source[1];
-    *dest[2] = source[2];
+    dest[0] = source[0];
+    dest[1] = source[1];
+    dest[2] = source[2];
 }
 
 //Calculate area of triangle

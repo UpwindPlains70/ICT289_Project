@@ -45,7 +45,6 @@ void myinit(void){
 
 void drawPlayer(int i, GLdouble colour[]){
 //Draw player (Capsule)
-
     glColor3f(colour[0], colour[1], colour[2]);   // 0.4, 0.1, 0.1
     glScaled(0.02,0.02,0.02);
     draw3DObject(playerArray[i].charObj);
@@ -150,6 +149,20 @@ void display(void){
         glPopMatrix();
     }
 
+    if(playerArray[1].swingMode == powering || playerArray[1].swingMode == cooling)
+    {
+        glPushMatrix();
+            drawPlayerTwoPower();
+        glPopMatrix();
+    }
+
+    if(playerArray[0].swingMode == powering || playerArray[0].swingMode == cooling)
+    {
+        glPushMatrix();
+            drawPlayerOnePower();
+        glPopMatrix();
+    }
+
     currTime = glutGet(GLUT_ELAPSED_TIME) / 1000.0;
     timeSincePrevFrame = currTime - prevTime;
     //glutTimerFunc(TIMER,movePlayerA, 0); // this function is called every TIMER ms
@@ -199,10 +212,11 @@ void read3DObjects(){
         ReadOFFfile("objects/Racket_Handle.off", &playerArray[i].handle);
         ReadOFFfile("objects/Racket_Pad.off", &playerArray[i].pad);
 
-        calcCenterOfMass(playerArray[i].charObj, playerArray[i].CoM ); /// added this each players COM
+        calcCenterOfMass(playerArray[i].charObj, playerArray[i].CoM); /// added this each players COM
+        pointCopy(playerArray[i].CoM, playerArray[i].startPos); ///Create copy of CoM for start position
         getMaxMin(playerArray[i].charObj, ma1, mi1); /// so far only used this so I can get the players height
         playerArray[i].charHieght = maxYFloat - minYFloat;
-
+        playerArray[i].swingMode = idle;
     }
 }
 
@@ -214,7 +228,7 @@ int main(int argc, char** argv) {
 
     glutInit(&argc,argv); /* Standard GLUT initialization */
 
-    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB  | GLUT_DEPTH); //(GLUT_SINGLE|GLUT_RGB);
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB  | GLUT_DEPTH); //(GLUT_SINGLE|GLUT_RGB);
     glutInitWindowSize(600,600); /* 500 x 500 pixel window */
     glutInitWindowPosition(0,0); /* place window top left on display */
     glutCreateWindow("Squash Simulator"); /* window title */

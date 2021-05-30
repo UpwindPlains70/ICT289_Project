@@ -17,9 +17,11 @@ bool gameStarted = false;
 
 void startGame()
 {
+    resetPlayerPos();
     resetBall(); ///Reset ball color & position
     gameStarted = true; ///Allows ball to spawn
     newGame(); ///Reset scoreboard
+    createMainMenu(); //Recreate menu without some options
 }
 
 void resetGameSettings()
@@ -127,7 +129,7 @@ void helpMenu()
 	// handle the events
 	menu = glutCreateMenu(processHelpEvents); ///Only uses the main menu option
 
-	glutAddMenuEntry("Start Game",2);
+    glutAddMenuEntry("Start Game",1);
 	glutAddMenuEntry("Main Menu",2);
 
 	//writeOptionsMenuDisplay();
@@ -168,9 +170,12 @@ void createMainMenu() {
 	menu = glutCreateMenu(processMainMenuEvents);
 
 	//add entries to our menu
-	glutAddMenuEntry("Start Game",1);
-	glutAddMenuEntry("Options",2);
-	glutAddMenuEntry("Reset Game Setting",3);
+
+        glutAddMenuEntry("Start Game",1);
+    if(gameStarted == false){
+        glutAddMenuEntry("Options",2);
+        glutAddMenuEntry("Reset Game Setting",3);
+	}
 	glutAddMenuEntry("Help",4);
 	glutAddMenuEntry("Quit",5);
 
