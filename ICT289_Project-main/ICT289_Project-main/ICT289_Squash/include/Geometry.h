@@ -117,21 +117,21 @@ float calcRadius(Object3D *obj, GLfloat *CoM)
 //Calculate center of mass of given object
 //Pre-conditions: Valid existing object3D and address to a Poin3D
 //Post-conditions: populates passed Poin3D with center of mass
-void calcCenterOfMass(Object3D obj, Point3D *CoM){
-    *CoM[0] = 0; //Set to zero for accurate calculations
-    *CoM[1] = 0; //Set to zero for accurate calculations
-    *CoM[2] = 0; //Set to zero for accurate calculations
+void calcCenterOfMass(Object3D obj, Point3D CoM){ /// changed from Point3D *CoM as I couldn't get it working
+    CoM[0] = 0.0; //Set to zero for accurate calculations
+    CoM[1] = 0.0; //Set to zero for accurate calculations
+    CoM[2] = 0.0; //Set to zero for accurate calculations
 
     for(int i = 0; i < obj.nverts; ++i)
     {
-        *CoM[0] += obj.vertices[i][0];
-        *CoM[1] += obj.vertices[i][1];
-        *CoM[2] += obj.vertices[i][2];
+        CoM[0] += obj.vertices[i][0];
+        CoM[1] += obj.vertices[i][1];
+        CoM[2] += obj.vertices[i][2];
     }
 
-    *CoM[0] /= obj.nverts;
-    *CoM[1] /= obj.nverts;
-    *CoM[2] /= obj.nverts;
+    CoM[0] /= obj.nverts;
+    CoM[1] /= obj.nverts;
+    CoM[2] /= obj.nverts;
 }
 
 Face3D UnitNormalVector(Face3D v1, Face3D v2)

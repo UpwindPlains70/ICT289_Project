@@ -3,10 +3,13 @@
 #include <GL/freeglut.h>
 #include "Geometry.h"
 
-typedef int max[2];
-typedef int min[2];
+typedef int max[3]; // changing from size 2 to size 3
+typedef int min[3];
 max ma1,ma2;
 min mi1,mi2;
+
+GLfloat maxYFloat; /// use this make sure player isn't halfway through the ground
+GLfloat minYFloat;
 
 void getMaxMin(Object3D bone, max ma, min mi){
     unsigned xMax=0;
@@ -15,6 +18,10 @@ void getMaxMin(Object3D bone, max ma, min mi){
     unsigned xMin=bone.vertices[0][0];
     unsigned yMin=bone.vertices[0][1];
     unsigned zMin=bone.vertices[0][2];
+
+    maxYFloat = 0.0;
+    minYFloat = 0.0;
+
     for(int i = 0; i < bone.nverts; i++){
             if(bone.vertices[i][0] >= xMax){
                 xMax = bone.vertices[i][0];
@@ -24,8 +31,10 @@ void getMaxMin(Object3D bone, max ma, min mi){
 
             if(bone.vertices[i][1] >= yMax){
                 yMax = bone.vertices[i][1];
+                maxYFloat = bone.vertices[i][1];
             }else if(bone.vertices[i][1] >= yMin){
                 yMin = bone.vertices[i][1];
+                minYFloat = bone.vertices[i][1];
             }
 
             if(bone.vertices[i][2] >= zMax){
