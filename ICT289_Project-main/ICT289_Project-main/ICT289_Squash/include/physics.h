@@ -10,7 +10,7 @@ typedef GLfloat point3[3];
 //animation timers
 float startTime, prevTime;
 //size of ball *to calculate energy loss for "bouncy effect"
-float ballRadius = 1.5;
+float ballRadius = 7.5;
 //level of energy loss
 float dropOff = 0.75;
 // gravity (earth) (affects velocity)
@@ -20,7 +20,7 @@ Point3D startPos = {0, 150, -23};
 //current and previous position of ball
 point3 currPos, prevPos;
 //initial velocity for x,y,z directions
-point3 v0 ={200, 0, -80};
+point3 v0 ={250, 0, 0};
 //current and previous velocity
 point3 currVel, prevVel;
 

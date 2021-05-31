@@ -6,7 +6,7 @@
 
 #include "Geometry.h"
 #include "ReadOFFfile.h"
-#include "ball.h" ///REMOVE IN FINAL
+//#include "ball.h" ///REMOVE IN FINAL
 
 typedef enum {reset, hit, idle} swingStates; ///animation control states for character swing
 

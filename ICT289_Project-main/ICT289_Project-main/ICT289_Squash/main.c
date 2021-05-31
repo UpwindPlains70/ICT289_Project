@@ -15,6 +15,8 @@
 #include "include/ball.h"
 #include "include/physics.h"
 
+typedef GLfloat point3[3];
+
 static GLdouble viewer[]= {110.0, 40.0, -32.0, // initial camera location (across, up/down, distance to object)
                            0.0, 20.0, -32.0, // initial look at point
                            0.0, 1.0, 0.0};  // initial  upvector
@@ -164,7 +166,7 @@ void display(void){
         playerColours[0][0] = 0.0; // 0 to access colour profile for first character, then 0 to access Red float value
         playerColours[0][1] = 0.0;
         playerColours[0][2] = 1.0;
-        glTranslatef(77.0, 2.0 * playerArray[0].charHieght , -15.0); /// starting location of player1
+        glTranslatef(77.0, 0, -15.0); /// starting location of player1
         glTranslatef(playerArray[0].CoM[0], playerArray[0].CoM[1], playerArray[0].CoM[2]); /// move player1 based on CoM
         glRotatef(playerArray[0].currSwingAngle, 0, 1, 0);
         drawPlayer(0, playerColours[0]);          // passing index for player1, first element of player array and Array of a 3 element RGB array
@@ -178,7 +180,7 @@ void display(void){
         playerColours[1][1] = 1.0;
         playerColours[1][2] = 0.0;
             //NEED TO COMPENSATE FOR CoM TRANSLATE
-        glTranslatef(77.0, 2.0 * playerArray[1].charHieght , -50.0); /// starting location of player2
+        glTranslatef(77.0, 0 , -50.0); /// starting location of player2
         glTranslatef(playerArray[1].CoM[0], playerArray[1].CoM[1], playerArray[1].CoM[2]); /// move player2 based on CoM
         glRotatef(playerArray[1].currSwingAngle, 0, 1, 0);
         drawPlayer(1, playerColours[1]); // passing index for player1, second element of player array
@@ -199,21 +201,19 @@ void read3DObjects(){
         ReadOFFfile("objects/Racket_Pad.off", &playerArray[i].pad);
 
         calcCenterOfMass(playerArray[i].charObj, playerArray[i].CoM ); /// added this each players COM
-        getMaxMin(playerArray[i].charObj, ma1, mi1); /// so far only used this so I can get the players height
+        //getMaxMin(playerArray[i].charObj); /// so far only used this so I can get the players height
         playerArray[i].charHieght = maxYFloat - minYFloat;
 
     }
 }
 
 void racketCollision(point3 currPos){
-    getMaxMin(playerArray[0].pad,maP1,miP1);
-    getMaxMin(playerArray[1].pad,maP2,miP2);
-
-    Object3D bone1 = playerArray[0].pad;
-    Object3D bone2 = playerArray[1].pad;
+    getMaxMin(playerArray[0].pad,ma1,mi1);
+    getMaxMin(playerArray[1].pad,ma2,mi2);
 
     //check plyr1 racket
-    max mab,mib;
+    point3 mab;
+    point3 mib;
     mab[0] = currPos[0]+ballRadius;
     mab[1] = currPos[1]+ballRadius;
     mab[2] = currPos[2]+ballRadius;
@@ -221,12 +221,14 @@ void racketCollision(point3 currPos){
     mib[1] = currPos[1]-ballRadius;
     mib[2] = currPos[2]-ballRadius;
 
-    if(collisionCheck(maP1,mab,miP1,mib,bone1)){
+    //plyr1
+    if(collisionCheck(ma1,mab,mi1,mib)){
         currVel[0] = -currVel[0];
         currVel[2] = -currVel[2];
     }
 
-    if(collisionCheck(maP2,mab,miP2,mib,bone2)){
+    //plyr2
+    if(collisionCheck(ma2,mab,mi2,mib)){
         currVel[0] = -currVel[0];
         currVel[2] = -currVel[2];
     }

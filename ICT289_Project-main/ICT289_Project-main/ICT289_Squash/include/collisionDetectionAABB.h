@@ -11,7 +11,7 @@ min mi1,mi2;
 GLfloat maxYFloat; /// use this make sure player isn't halfway through the ground
 GLfloat minYFloat;
 
-void getMaxMin(Object3D bone, max ma, min mi){
+void getMaxMin(Object3D bone,max ma, min mi){
     unsigned xMax=0;
     unsigned yMax=0;
     unsigned zMax=0;
@@ -52,13 +52,14 @@ void getMaxMin(Object3D bone, max ma, min mi){
     mi[2] = zMin;
 }
 
-BOOLEAN collisionCheck(max max1, max max2, min min1, min min2, Object3D bone){
-    for(int i = 0; i < bone.nverts; i++){
-        if((min1[0] <= max2[0] || max1[0] >= min2[0])&&(min1[1] <= max2[1] || max1[1] >= min2[1])&&(min1[2] <= max2[2] || max1[2] >= min2[2])){
-            return TRUE;
-        }
+
+
+BOOLEAN collisionCheck(max max1, max max2, min min1, min min2){
+    if((min1[0] <= max2[0] && max1[0] >= min2[0])&&(min1[1] <= max2[1] && max1[1] >= min2[1])&&(min1[2] <= max2[2] && max1[2] >= min2[2])){
+        return TRUE;
+    }else{
+        return FALSE;
     }
-    return FALSE;
 }
 
 #endif // COLLISIONDETECTIONAABB_H_INCLUDED
