@@ -15,14 +15,10 @@ bool optionsMenuActive = false;
 bool helpMenuActive = false;
 bool gameStarted = false;
 
-
-
 void startGame()
 {
     resetBall(); ///Reset ball color & position
     gameStarted = true; ///Allows ball to spawn
-    hasHitBall[0] = FALSE;
-    hasHitBall[1] = FALSE;
     newGame(); ///Reset scoreboard
 }
 

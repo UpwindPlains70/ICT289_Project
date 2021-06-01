@@ -6,9 +6,6 @@
 
 #include "Geometry.h"
 #include "ReadOFFfile.h"
-//#include "ball.h" ///REMOVE IN FINAL
-
-typedef enum {reset, hit, idle} swingStates; ///animation control states for character swing
 
 typedef struct playerObj{
     Object3D charObj;
@@ -20,305 +17,76 @@ typedef struct playerObj{
     Object3D pad;
     Point3D handleCoM;
     Point3D padCoM;
-
-    float currSwingAngle;
-    swingStates swingMode;
 }playerObj;
 
+playerObj playerA;
+playerObj playerB;
 
-//playerObj playerA;      // using the array of playerObj instead by referring to [0] and [1] for playerA and playerB
-//playerObj playerB;
+float movementSpeed = 20.0f;
 
-float startTime, prevTime;
-float currTime;
-float timeSincePrevFrame;
-
-float maxSpeedMod = 60; ///Allows for adjustable player speed
-float minSpeedMod = 30;
-float defaultSpeedMod = 40;
-
-float speedMod = 40; /// control the speed of all the movements
-
-BOOL keyboardKeys[256]; /// bool to know if a key is currently being pressed down or not, using this so both players can move at the same time
-BOOL arrowKeys[4];
-
-typedef GLdouble Colours[3];
-Colours playerColours[2];
-
-playerObj playerArray[2];
-
-    ///Swing animation parameters
-#define TIMERMSECS 150 /// callback frequency
-int maxSwingAngle = 60; ///Max swing angle of players
-
-float maxSwingSpeed = 100; ///Allows for adjustable game parameters
-float minSwingSpeed = 60;
-float defaultSwingSpeed = 80;
-
-float swingSpeed = 80; ///speed of swing & reset
-
-    //Cannot be moved to another file due to circular reference
-void playerOneSwing(void){
-
-    if(playerArray[0].swingMode != idle)
-        glutTimerFunc(TIMERMSECS, playerOneSwing, 0);
-
-    //Get elapsed time in seconds
-    float currTime = glutGet(GLUT_ELAPSED_TIME) / 1000.0;
-    float timeSincePrevFrame = currTime - prevTime;
-
-    //Update days
-
-        ///First check for reset otherwise if not idle swing
-    if((playerArray[0].currSwingAngle >= maxSwingAngle) || ((playerArray[0].swingMode == reset) && (playerArray[0].swingMode != idle)))
-    {
-        playerArray[0].swingMode = reset;
-        playerArray[0].currSwingAngle -= swingSpeed * timeSincePrevFrame;
-    }
-    else if(playerArray[0].swingMode != idle)
-    {
-         playerArray[0].currSwingAngle += swingSpeed * timeSincePrevFrame;
-    }
-
-        ///Set swing mode to idle as animation has completed
-    if(playerArray[0].currSwingAngle < 0.2 && playerArray[0].currSwingAngle > -0.2 && playerArray[0].swingMode == reset)
-    {
-        playerArray[0].swingMode = idle;
-    }
-
-    //save current time for use in next frame
-    prevTime = currTime;
-
-    glutPostRedisplay();
-}
-
-    //Cannot be moved to another file due to circular reference
-void playerTwoSwing(void){
-
-    if(playerArray[1].swingMode != idle)
-        glutTimerFunc(TIMERMSECS, playerTwoSwing, 0);
-
-    //Get elapsed time in seconds
-    float currTime = glutGet(GLUT_ELAPSED_TIME) / 1000.0;
-    float timeSincePrevFrame = currTime - prevTime;
-
-    //Update days
-
-        ///First check for reset otherwise if not idle swing
-    if(playerArray[1].currSwingAngle >= maxSwingAngle || playerArray[1].swingMode == reset && playerArray[1].swingMode != idle)
-    {
-        playerArray[1].swingMode = reset;
-        playerArray[1].currSwingAngle -= swingSpeed * timeSincePrevFrame;
-    }
-    else if(playerArray[1].swingMode != idle)
-    {
-         playerArray[1].currSwingAngle += swingSpeed * timeSincePrevFrame;
-    }
-
-        ///Set swing mode to idle as animation has completed
-    if(playerArray[1].currSwingAngle < 0.2 && playerArray[1].currSwingAngle > -0.2 && playerArray[1].swingMode == reset)
-    {
-        playerArray[1].swingMode = idle;
-    }
-
-    //save current time for use in next frame
-    prevTime = currTime;
-
-    glutPostRedisplay();
-}
-
-void movePlayerB()  // unsigned char key, int x, int y
+void movePlayerB(unsigned char key, int x, int y)
 {
-   if(keyboardKeys['w']) moveLeft(&playerArray[1]);
+    if(key == 'w' || key == 'W') moveForward(&playerB);
 
-    if(keyboardKeys['a']) moveBack(&playerArray[1]);
+    if(key == 'a' || key == 'A') moveLeft(&playerB);
 
-    if(keyboardKeys['s']) moveRight(&playerArray[1]);
+    if(key == 's' || key == 'S') moveBack(&playerB);
 
-    if(keyboardKeys['d']) moveForward(&playerArray[1]);
+    if(key == 'd' || key == 'D') moveRight(&playerB);
 
         //play hit animation
-    if(keyboardKeys['f'])
-    {
-        playerArray[1].swingMode = hit; //hitting
-        glutTimerFunc(TIMERMSECS, playerTwoSwing, 0);
-    }
+    if(key == 'f' || key == 'F'){}
 
-    if(keyboardKeys['q']) exit(0);
-
-    //glutPostRedisplay();
-
+    if(key =='q' || key == 'Q') exit(0);
+    glutPostRedisplay();
 }
 
-void pressedSpecialDown(int key, int x, int y){
-
+void movePlayerA(int key, int x, int y)
+{
     switch (key) {
 		case GLUT_KEY_UP:
-           // moveForward(&playerArray[0]);
-            arrowKeys[0] = TRUE;
+            moveForward(&playerA);
 		    break;
-
 		case GLUT_KEY_LEFT:
-		   // moveLeft(&playerArray[0]);
-		    arrowKeys[1] = TRUE;
+		    moveLeft(&playerA);
 		    break;
-
 		case GLUT_KEY_DOWN:
-          //  moveBack(&playerArray[0]);
-            arrowKeys[2] = TRUE;
+            moveBack(&playerA);
 		    break;
-
 		case GLUT_KEY_RIGHT:
-		   // moveRight(&playerArray[0]);
-            arrowKeys[3] = TRUE;
+		    moveRight(&playerA);
 		    break;
-
-
         //hit key for player A
 	}
 
-	 //glutPostRedisplay();
-
+	glutPostRedisplay();
 }
 
-void pressedSpecialUp(int key, int x, int y){
-
-    switch (key) {
-		case GLUT_KEY_UP:
-           // moveForward(&playerArray[0]);
-            arrowKeys[0] = FALSE;
-		    break;
-		case GLUT_KEY_LEFT:
-		   // moveLeft(&playerArray[0]);
-		    arrowKeys[1] = FALSE;
-		    break;
-		case GLUT_KEY_DOWN:
-          //  moveBack(&playerArray[0]);
-            arrowKeys[2] = FALSE;
-		    break;
-		case GLUT_KEY_RIGHT:
-		   // moveRight(&playerArray[0]);
-            arrowKeys[3] = FALSE;
-		    break;
-
-
-        //hit key for player A
-	}
-
-    //glutPostRedisplay();
-}
-
-void pressedDown(unsigned char key, int x, int y)
+void moveForward(playerObj *obj)
 {
-   // increaseP1Score();
-    changeBallColor();
-    keyboardKeys[key] = TRUE;
-    //glutPostRedisplay();
-}
-
-void pressedUp(unsigned char key, int x, int y)
-{
-    keyboardKeys[key] = FALSE;
-    //glutPostRedisplay();
-}
-
-void movePlayerA()
-{
-        //UP
-    if(arrowKeys[0]) moveLeft(&playerArray[0]);
-        //left
-    if(arrowKeys[1]) moveBack(&playerArray[0]);
-        //down
-    if(arrowKeys[2]) moveRight(&playerArray[0]);
-        //right
-    if(arrowKeys[3]) moveForward(&playerArray[0]);
-
-        //swing
-    if(keyboardKeys[' '])
-    {
-
-        playerArray[0].swingMode = hit; //hitting
-        glutTimerFunc(TIMERMSECS, playerOneSwing, 0);
-    }
-	//glutPostRedisplay();
-}
-
-void moveForward(playerObj *obj) /// changing from using hard coded &playerA.charObj to the passed parameter
-{
-    obj->CoM[2] += -timeSincePrevFrame * speedMod;
-    obj->CoM[2] += -timeSincePrevFrame * speedMod;
-    obj->CoM[2] += -timeSincePrevFrame * speedMod;
-
-    obj->padCoM[2] += -timeSincePrevFrame * speedMod;
-    obj->padCoM[2] += -timeSincePrevFrame * speedMod;
-    obj->padCoM[2] += -timeSincePrevFrame * speedMod;
-
+    translate3DObject(&playerA.charObj, 0, 0, -movementSpeed);
+    translate3DObject(&playerA.handle, 0, 0, -movementSpeed);
+    translate3DObject(&playerA.pad, 0, 0, -movementSpeed);
 }
 
 void moveBack(playerObj *obj)
 {
-    obj->padCoM[2] += timeSincePrevFrame * speedMod;
-    obj->padCoM[2] += timeSincePrevFrame * speedMod;
-    obj->padCoM[2] += timeSincePrevFrame * speedMod;
-
-    obj->CoM[2] += timeSincePrevFrame * speedMod;
-    obj->CoM[2] += timeSincePrevFrame * speedMod;
-    obj->CoM[2] += timeSincePrevFrame * speedMod;
+    translate3DObject(&playerA.charObj, 0, 0, movementSpeed);
+    translate3DObject(&playerA.handle, 0, 0, movementSpeed);
+    translate3DObject(&playerA.pad, 0, 0, movementSpeed);
 }
 
 void moveLeft(playerObj *obj)
 {
-    obj->CoM[0] += -timeSincePrevFrame * speedMod;
-    obj->CoM[0] += -timeSincePrevFrame * speedMod;
-    obj->CoM[0] += -timeSincePrevFrame * speedMod;
-
-    obj->padCoM[0] += -timeSincePrevFrame * speedMod;
-    obj->padCoM[0] += -timeSincePrevFrame * speedMod;
-    obj->padCoM[0] += -timeSincePrevFrame * speedMod;
+    translate3DObject(&playerA.charObj, -movementSpeed, 0,0);
+    translate3DObject(&playerA.handle, -movementSpeed, 0,0);
+    translate3DObject(&playerA.pad, -movementSpeed, 0,0);
 }
 
 void moveRight(playerObj *obj)
 {
-    obj->CoM[0] += timeSincePrevFrame * speedMod;
-    obj->CoM[0] += timeSincePrevFrame * speedMod;
-    obj->CoM[0] += timeSincePrevFrame * speedMod;
-
-    obj->padCoM[0] += timeSincePrevFrame * speedMod;
-    obj->padCoM[0] += timeSincePrevFrame * speedMod;
-    obj->padCoM[0] += timeSincePrevFrame * speedMod;
-}
-
-
-void increasePlayerSpeed()
-{
-    if(speedMod < maxSpeedMod)
-        speedMod++; ///Increase speed by one
-    else
-        printf("Player speed is at maximum: %f\n", speedMod);
-}
-
-void decreasePlayerSpeed()
-{
-    if(speedMod > minSpeedMod)
-        speedMod--; ///Increase speed by one
-    else
-        printf("Player speed is at minimum: %f\n", speedMod);
-}
-
-
-void increaseSwingSpeed()
-{
-    if(swingSpeed < maxSwingSpeed)
-        swingSpeed++;
-    else
-        printf("Swing speed is at maximum: %f\n", swingSpeed);
-}
-
-void decreaseSwingSpeed()
-{
-    if(swingSpeed > minSwingSpeed)
-        swingSpeed--;
-    else
-        printf("Swing speed is at minimum: %f\n", swingSpeed);
+    translate3DObject(&playerA.charObj, movementSpeed, 0,0);
+    translate3DObject(&playerA.handle, movementSpeed, 0,0);
+    translate3DObject(&playerA.pad, movementSpeed, 0,0);
 }
 #endif // PLAYER_H
