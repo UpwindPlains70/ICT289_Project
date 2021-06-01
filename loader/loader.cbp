@@ -31,31 +31,11 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="BallPhysics.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="BallPhysics.h" />
 		<Unit filename="Bool.h" />
-		<Unit filename="Collision.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Collision.h" />
-		<Unit filename="ConsoleIO.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="ConsoleIO.h" />
 		<Unit filename="Constants.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Constants.h" />
-		<Unit filename="Input.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Input.h" />
-		<Unit filename="ObjectRendering.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="ObjectRendering.h" />
 		<Unit filename="Structs.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -68,10 +48,6 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="UI.h" />
-		<Unit filename="level.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="level.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>

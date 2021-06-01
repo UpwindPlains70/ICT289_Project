@@ -1,10 +1,12 @@
 #include "UI.h"
 
-struct Texture texSplashScreen;
+//struct Texture texSplashScreen;
+GLuint texID;
 void InitializeUI()
 {
         ///OUR group pic
-    texSplashScreen = LoadTexture("res/GroupPic.raw", 946, 437, 4);
+    //texSplashScreen = LoadTexture("res/GroupPic.raw", 946, 437, 4);
+    texID = LoadTexture("res/GroupPic.raw", 946, 437, 4);
 
         ///Original groups pic
     //texSplashScreen = LoadTexture("res/SplashScreen.raw", 1024, 512, 4);
@@ -21,7 +23,7 @@ void DrawSplash()
         glMatrixMode(GL_MODELVIEW);
         //glPushMatrix();
             glLoadIdentity();
-            glBindTexture(GL_TEXTURE_2D, texSplashScreen.texId);
+            glBindTexture(GL_TEXTURE_2D, texID);
             glBegin(GL_QUADS);
                 glTexCoord2f(0, 0);
                 glVertex3f(0, 0, 0);

@@ -1,5 +1,5 @@
 #include "TextureLoading.h"
-struct Texture LoadTexture(const char * filepath, int width, int height, int byteSize)
+GLuint LoadTexture(const char * filepath, int width, int height, int byteSize)
 {
     unsigned char * data;
     FILE * filePointer;
@@ -24,27 +24,9 @@ struct Texture LoadTexture(const char * filepath, int width, int height, int byt
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
-	GLenum format;
-	switch(byteSize)
-	{
-    case 4:
-        format = GL_RGBA;
-        break;
-    case 3:
-        format = GL_RGB;
-        break;
-    default:
-        format = GL_RGBA;
-        break;
-	}
-
-	gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGBA, width, height, format, GL_UNSIGNED_BYTE, data);
+	gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGBA, width, height, GL_RGBA, GL_UNSIGNED_BYTE, data);
 
 	free(data);
 
-	struct Texture tex;
-	tex.texId = texId;
-	tex.texWidth = width;
-	tex.texHeight = height;
-	return tex;
+	return texId;
 }
