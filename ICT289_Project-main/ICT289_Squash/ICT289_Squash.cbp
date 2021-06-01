@@ -36,7 +36,11 @@
 		<Unit filename="include/Geometry.h" />
 		<Unit filename="include/ReadOFFfile.h" />
 		<Unit filename="include/Room.h" />
+		<Unit filename="include/ball.h" />
 		<Unit filename="include/collisionDetectionAABB.h" />
+		<Unit filename="include/menus.h" />
+		<Unit filename="include/menusDisplay.h" />
+		<Unit filename="include/physics.h" />
 		<Unit filename="include/player.h" />
 		<Unit filename="include/scoreDisplay.h" />
 		<Unit filename="main.c">

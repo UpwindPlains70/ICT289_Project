@@ -1,8 +1,6 @@
 
 #include "Geometry.h"
 
-void drawCourt(){
-
     Point3D leftWall[4] = { {0.0,0.0,0.0},  {0.0, 56.4, 0.0}, {0.0,56.4,-64.0}, {0.0, 0.0, -64.0} };
     Point3D serviceLine[2] = { {0.0, 5.0, 0.0}, {0.0,5.0, -64.0} };
     Point3D frontWallLine[4] = { {0.0, 45.7, 0.0}, {0.0, 17.8, 0.0},  {0.0, 17.8, -64.0} , {0.0, 45.7, -64.0}  };
@@ -18,12 +16,18 @@ void drawCourt(){
     Point3D sideWall[4] = { {0.0,0.0,-64.0}, {0.0,56.4,-64.0}, {54.4 + 16.0 + 26.1 ,56.4,-64.0},
         {54.4 + 16.0 + 26.1 ,0.0,-64.0}
     };
-    Point3D sideWallLine[2] = { {0.0, 45.7, -64.0}, {54.4 + 16.0 + 26.1, 21.3, -64.0}  };
+    Point3D leftSideWallLine[2] = { {0.0, 45.7, -64.0}, {54.4 + 16.0 + 26.1, 21.3, -64.0}  };
+    Point3D rightSideWallLine[2] = { {0.0, 45.7, 0.0}, {54.4 + 16.0 + 26.1, 21.3, 0.0}  };
     Point3D frontWall[4] = { {0.0,0.0,0.0}, {0.0,56.4,0.0}, {54.4 + 16.0 + 26.1 ,56.4,0.0},
         {54.4 + 16.0 + 26.1 ,0.0,0.0} };
     Point3D roof[4] = { {0.0,56.4,0.0}, {0.0,56.4,-64.0}, {54.4 + 16.0 + 26.1, 56.4, -64.0}, {54.4 + 16.0 + 26.1, 56.4, 0.0}   };
-    Point3D floor[4] = { {0.0,0.0,0.0}, {0.0,0.0,-64.0}, {54.4 + 16.0 + 26.1, 0.0, -64.0}, {54.4 + 16.0 + 26.1, 0.0, 0.0}   };
+    Point3D gamefloor[4] = { {0.0,0.0,0.0}, {0.0,0.0,-64.0}, {54.4 + 16.0 + 26.1, 0.0, -64.0}, {54.4 + 16.0 + 26.1, 0.0, 0.0}   };
 
+void drawCourt(){
+
+
+
+            ///Backwall
     glBegin(GL_LINE_LOOP);
 
         glColor3f(0.0,0.0,0.0);
@@ -34,6 +38,7 @@ void drawCourt(){
 
     glEnd();
 
+            ///Red serv line (back wall)
     glBegin(GL_LINE_LOOP);
 
         glColor3f(1.0,0.0,0.0);
@@ -42,6 +47,7 @@ void drawCourt(){
 
     glEnd();
 
+            ///Back lines (mid wall)
     glBegin(GL_LINE_LOOP);
 
         glColor3f(0.0,0.0,0.0);
@@ -52,6 +58,7 @@ void drawCourt(){
 
     glEnd();
 
+            ///Player section line (mid play zone)
     glBegin(GL_LINE_LOOP);
 
         glColor3f(1.0,0.0,0.0);
@@ -59,7 +66,7 @@ void drawCourt(){
         glVertex3fv(HCL[1]);
 
     glEnd();
-
+            ///Front service line
     glBegin(GL_LINE_LOOP);
 
         glColor3f(1.0,0.0,0.0);
@@ -67,7 +74,7 @@ void drawCourt(){
         glVertex3fv(shortLine[1]);
 
     glEnd();
-
+            ///P1 Service square
     glBegin(GL_LINE_LOOP);
 
         glColor3f(1.0,0.0,0.0);
@@ -78,6 +85,7 @@ void drawCourt(){
 
     glEnd();
 
+            ///P2 Service square
     glBegin(GL_LINE_LOOP);
 
         glColor3f(1.0,0.0,0.0);
@@ -87,6 +95,7 @@ void drawCourt(){
         glVertex3fv(SB2[3]);
 
     glEnd();
+
     glBegin(GL_LINE_LOOP);
 
         glColor3f(0.0,0.0,0.0);
@@ -95,6 +104,7 @@ void drawCourt(){
 
     glEnd();
 
+            ///Front wall (camera loc)
     glBegin(GL_LINE_LOOP);
 
         glColor3f(0.0,0.0,0.0);
@@ -105,6 +115,7 @@ void drawCourt(){
 
     glEnd();
 
+            ///Left wall
     glBegin(GL_LINE_LOOP);
 
         glColor3f(0.0,0.0,0.0);
@@ -115,14 +126,25 @@ void drawCourt(){
 
     glEnd();
 
+            ///Left side line
     glBegin(GL_LINE_LOOP);
 
         glColor3f(0.0,0.0,0.0);
-        glVertex3fv(sideWallLine[0]);
-        glVertex3fv(sideWallLine[1]);
+        glVertex3fv(leftSideWallLine[0]);
+        glVertex3fv(leftSideWallLine[1]);
 
     glEnd();
 
+            ///Right side line
+    glBegin(GL_LINE_LOOP);
+
+        glColor3f(0.0,0.0,0.0);
+        glVertex3fv(rightSideWallLine[0]);
+        glVertex3fv(rightSideWallLine[1]);
+
+    glEnd();
+
+            ///Right wall
     glBegin(GL_LINE_LOOP);
 
         glColor3f(0.0,0.0,0.0);
@@ -144,13 +166,14 @@ void drawCourt(){
 
     glEnd();*/
 
+            ///Floor
     glBegin(GL_POLYGON);
 
         glColor3f(1,0.7,0.0);
-        glVertex3fv(floor[0]);
-        glVertex3fv(floor[1]);
-        glVertex3fv(floor[2]);
-        glVertex3fv(floor[3]);
+        glVertex3fv(gamefloor[0]);
+        glVertex3fv(gamefloor[1]);
+        glVertex3fv(gamefloor[2]);
+        glVertex3fv(gamefloor[3]);
 
     glEnd();
 
