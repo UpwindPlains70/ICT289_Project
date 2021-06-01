@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1622509836 source:c:\users\peter\onedrive\uni\ict289\week11 - 13\labs\ict289_l6_ex6-2\edge.c
+	<gl/freeglut.h>
+	<GLUT/glut.h>
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+

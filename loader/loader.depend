@@ -1,0 +1,92 @@
+# depslib dependency file v1.0
+1527583342 source:c:\users\peter\onedrive\uni\ict289\week1\loader\ballphysics.c
+	<math.h>
+	"BallPhysics.h"
+
+1527583342 c:\users\peter\onedrive\uni\ict289\week1\loader\ballphysics.h
+	<GL/glut.h>
+	"Bool.h"
+	"Structs.h"
+
+1527583342 c:\users\peter\onedrive\uni\ict289\week1\loader\bool.h
+
+1527583342 c:\users\peter\onedrive\uni\ict289\week1\loader\structs.h
+	"Bool.h"
+	<GL/freeglut.h>
+	<GLUT/glut.h>
+
+1527583342 source:c:\users\peter\onedrive\uni\ict289\week1\loader\collision.c
+	"Collision.h"
+	"Structs.h"
+
+1527583342 c:\users\peter\onedrive\uni\ict289\week1\loader\collision.h
+	<math.h>
+	"Bool.h"
+	"Structs.h"
+	"Constants.h"
+
+1527583342 c:\users\peter\onedrive\uni\ict289\week1\loader\constants.h
+
+1527583342 source:c:\users\peter\onedrive\uni\ict289\week1\loader\consoleio.c
+	"ConsoleIO.h"
+	<stdlib.h>
+	<stdio.h>
+
+1527583342 c:\users\peter\onedrive\uni\ict289\week1\loader\consoleio.h
+	"level.h"
+
+1527583342 c:\users\peter\onedrive\uni\ict289\week1\loader\level.h
+	<math.h>
+	"Structs.h"
+	"TextureLoading.h"
+
+1622521061 c:\users\peter\onedrive\uni\ict289\week1\loader\textureloading.h
+	<stdio.h>
+	<GL/freeglut.h>
+	<GLUT/glut.h>
+	"Structs.h"
+
+1527583342 source:c:\users\peter\onedrive\uni\ict289\week1\loader\constants.c
+
+1527583342 source:c:\users\peter\onedrive\uni\ict289\week1\loader\input.c
+	"Input.h"
+
+1527583342 c:\users\peter\onedrive\uni\ict289\week1\loader\input.h
+	"Bool.h"
+
+1527583342 source:c:\users\peter\onedrive\uni\ict289\week1\loader\level.c
+	<stdio.h>
+	"level.h"
+	"ObjectRendering.h"
+	"Constants.h"
+
+1527583342 c:\users\peter\onedrive\uni\ict289\week1\loader\objectrendering.h
+	<GL/glut.h>
+	"Constants.h"
+	"Structs.h"
+
+1622520564 source:c:\users\peter\onedrive\uni\ict289\week1\loader\main.c
+	<stdio.h>
+	<stdlib.h>
+	"UI.h"
+
+1622519401 c:\users\peter\onedrive\uni\ict289\week1\loader\ui.h
+	"Structs.h"
+	"TextureLoading.h"
+	"Constants.h"
+	"Bool.h"
+	<math.h>
+	<stdio.h>
+
+1527583342 source:c:\users\peter\onedrive\uni\ict289\week1\loader\objectrendering.c
+	"ObjectRendering.h"
+	<math.h>
+
+1527583342 source:c:\users\peter\onedrive\uni\ict289\week1\loader\structs.c
+
+1527583342 source:c:\users\peter\onedrive\uni\ict289\week1\loader\textureloading.c
+	"TextureLoading.h"
+
+1622520990 source:c:\users\peter\onedrive\uni\ict289\week1\loader\ui.c
+	"UI.h"
+
