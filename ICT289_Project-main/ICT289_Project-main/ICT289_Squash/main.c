@@ -29,8 +29,13 @@ void myinit(void){
  /* attributes */
   glEnable(GL_DEPTH_TEST);
  glClearColor(1.0, 1.0, 1.0, 1.0); /* draw on white background */
- glColor3f(1.0, 0.0, 0.0); /* draw in red */
+ //glColor3f(1.0, 0.0, 0.0); /* draw in red */
  glLineWidth(5.0); /* draw using lines 5 pixels wide */
+
+ glEnable(GL_TEXTURE_2D);
+ glEnable(GL_BLEND);
+
+
 
  /* switch matrix mode to 'projection' and
  load an identity matrix as the projection matrix */
@@ -101,7 +106,11 @@ void display(void){
            viewer[3], viewer[4], viewer[5],
            viewer[6], viewer[7], viewer[8]);
 
-  //drawAxis();
+if(gameEnding == true){
+    LoadImages(); ///Prevents game loading if done in myinit
+    DrawGroupCred();
+}
+ else{
 
     drawCourt();
     WriteCaptions();
@@ -187,7 +196,7 @@ void display(void){
     glPopMatrix();
 //-------------------------------------------------------------
     checkIfScored();
-
+ }
  //glFlush(); /* flush buffers */
     glutSwapBuffers();
 }
@@ -250,6 +259,9 @@ int main(int argc, char** argv) {
 
     startTime = glutGet(GLUT_ELAPSED_TIME) / 1000.f;
     prevTime = startTime;
+
+glEnable(GL_TEXTURE_2D);
+ glEnable(GL_BLEND);
 
     initPositions();
     createMainMenu(); ///GLUT menus

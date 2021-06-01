@@ -8,14 +8,16 @@
 #include "player.h"
 #include "menusDisplay.h"
 #include "ball.h"
+#include "QuitHandler.h"
 
 typedef enum {false, true} bool;
 
 bool optionsMenuActive = false;
 bool helpMenuActive = false;
 bool gameStarted = false;
+bool gameEnding = false;
 
-
+void processMainMenuEvents(int option);
 
 void startGame()
 {
@@ -141,6 +143,22 @@ void helpMenu()
 	glutAttachMenu(GLUT_RIGHT_BUTTON);
 }
 
+void createQuitMenu()
+{
+    int menu;
+
+	// create the menu and
+	// tell glut that "processMenuEvents" will
+	// handle the events
+	menu = glutCreateMenu(processMainMenuEvents);
+
+	//add entries to our menu
+	glutAddMenuEntry("Quit",6);
+
+	// attach the menu to the right button
+	glutAttachMenu(GLUT_RIGHT_BUTTON);
+}
+
 void processMainMenuEvents(int option) {
 
 	switch (option) {
@@ -158,7 +176,11 @@ void processMainMenuEvents(int option) {
 		     helpMenuActive = true;
 			 helpMenu();
 			 break;
-        case 5:  ///Quit program
+        case 5:  ///Display group pic
+            gameEnding = true;
+            createQuitMenu();
+            break;
+        case 6: ///Quit program
             exit(0);
             break;
 	}
