@@ -26,6 +26,9 @@ GLdouble aspect	 = 1;		// aspect ratio aspect = height/width
 GLdouble nearVal = 0.1;
 GLdouble farVal  = 1000;     // near and far clipping planes
 
+//light
+const GLfloat light_position[] = {100,50,-50,1};
+
 void myinit(void){
  /* attributes */
   glEnable(GL_DEPTH_TEST);
@@ -36,7 +39,10 @@ void myinit(void){
  glEnable(GL_TEXTURE_2D);
  glEnable(GL_BLEND);
 
+glEnable(GL_LIGHTING);
+    glEnable(GL_LIGHT0);
 
+    glLightfv(GL_LIGHT0,GL_POSITION,light_position);
 
  /* switch matrix mode to 'projection' and
  load an identity matrix as the projection matrix */
@@ -81,7 +87,6 @@ void draw3DObject(Object3D obj){
             glVertex3fv(obj.vertices[f.x]);
             glVertex3fv(obj.vertices[f.y]);
             glVertex3fv(obj.vertices[f.z]);
-
         glEnd();
     }
         //translateObject3D(&obj, &centerOfMass); //moves object to 0,0,0
@@ -106,6 +111,11 @@ void display(void){
  gluLookAt(viewer[0], viewer[1], viewer[2],
            viewer[3], viewer[4], viewer[5],
            viewer[6], viewer[7], viewer[8]);
+
+    glEnable(GL_COLOR_MATERIAL);
+    glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
+
+    glEnable(GL_NORMALIZE);
 
 if(gameEnding == true){
     LoadImages(); ///Prevents game loading if done in myinit
@@ -199,6 +209,7 @@ if(gameEnding == true){
     checkIfScored();
  }
  //glFlush(); /* flush buffers */
+    glDisable(GL_COLOR_MATERIAL);
     glutSwapBuffers();
 }
 
@@ -225,10 +236,25 @@ void checkIfScored(){
 
 void read3DObjects(){
         //changing to read in data into all playerObjects from an array
+   Point3D tem;
     for(int i = 0; i < 2; i++){
         ReadOFFfile("objects/Capsule.off", &playerArray[i].charObj);
         ReadOFFfile("objects/Racket_Handle.off", &playerArray[i].handle);
         ReadOFFfile("objects/Racket_Pad.off", &playerArray[i].pad);
+
+        //calc normals of player faces
+
+        /*
+        for(int ix = 0; ix < playerArray[i].charObj.nfaces;ix++)
+        {
+                //player
+                CP()
+                //handle
+
+                //pad
+        }
+
+        */
 
         calcCenterOfMass(playerArray[i].charObj, playerArray[i].CoM ); /// added this each players COM
         calcCenterOfMass(playerArray[i].pad, playerArray[i].padCoM );

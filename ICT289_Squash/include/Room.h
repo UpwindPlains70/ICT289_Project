@@ -28,9 +28,9 @@ void drawCourt(){
 
 
             ///Backwall
-    glBegin(GL_LINE_LOOP);
+    glBegin(GL_POLYGON);
 
-        glColor3f(0.0,0.0,0.0);
+        glColor3f(1,1,1);
         glVertex3fv(leftWall[0]);
         glVertex3fv(leftWall[1]);
         glVertex3fv(leftWall[2]);
@@ -116,9 +116,9 @@ void drawCourt(){
     glEnd();
 
             ///Left wall
-    glBegin(GL_LINE_LOOP);
+    glBegin(GL_POLYGON);
 
-        glColor3f(0.0,0.0,0.0);
+        glColor3f(1,1,1);
         glVertex3fv(sideWall[0]);
         glVertex3fv(sideWall[1]);
         glVertex3fv(sideWall[2]);
@@ -145,9 +145,9 @@ void drawCourt(){
     glEnd();
 
             ///Right wall
-    glBegin(GL_LINE_LOOP);
+    glBegin(GL_POLYGON);
 
-        glColor3f(0.0,0.0,0.0);
+        glColor3f(1,1,1);
         glVertex3fv(frontWall[0]);
         glVertex3fv(frontWall[1]);
         glVertex3fv(frontWall[2]);
@@ -155,7 +155,7 @@ void drawCourt(){
 
     glEnd();
 
-    /*
+
     glBegin(GL_POLYGON);
 
         glColor3f(0.3,0.3,0.3);
@@ -164,7 +164,7 @@ void drawCourt(){
         glVertex3fv(roof[2]);
         glVertex3fv(roof[3]);
 
-    glEnd();*/
+    glEnd();
 
             ///Floor
     glBegin(GL_POLYGON);
