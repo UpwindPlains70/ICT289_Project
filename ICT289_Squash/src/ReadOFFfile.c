@@ -1,14 +1,7 @@
-#ifndef READOFFfile_H
-#define READOFFfile_H
 #include <stdio.h>
 #include <stdlib.h>
 #include "Geometry.h"
-
-void PointReader(Object3D *obj, FILE *in_File);
-void FaceReader(Object3D *obj, FILE *in_File);
-void NormReader(Object3D *obj);
-
-char title[];//junk bin for first line of file
+#include "ReadOFFfile.h"
 
 //Reads an OFF storing data in passed Object3D
 //Pre-condition: Existing file name and Object3D variable
@@ -89,4 +82,4 @@ void NormReader(Object3D *obj)
         CrossProduct(vectorA, vectorB, obj->norms[i]);
     }
 }
-#endif //READOFFfile_H
+

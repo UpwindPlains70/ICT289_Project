@@ -3,21 +3,27 @@
 
 ////Due to the nature of this code, scores are of a maximum of 9 as any further will lead to ascill code beyond 9;
 
+#include "Geometry.h"
+
 //change values on top to alter score;
-;int plyr1Score = 0;
+int plyr1Score = 0;
 int plyr2Score = 0;
 
 typedef enum {p1, p2, none} winnerStates;
 
-int maxScore = 10;
-int minScore = 1;
-int defaultWinScore = 5;
+const int maxScore = 9;
+const int minScore = 1;
+const int defaultWinScore = 5;
 
 int winScore = 5;
 
 winnerStates gameWinner = none;
 
-void WriteCaptions(void)
+const Face3D p1ScorePos = {5, 40,-26};
+const Face3D p2ScorePos = {5, 40,-38};
+
+
+void WriteScores(void)
 {
     //int to character
     char p1 = plyr1Score +'0';
@@ -29,12 +35,12 @@ void WriteCaptions(void)
     //////find a good location for scores
     //player 1
     ////3dlocation
-    glRasterPos3i(0, 40,-26);
+    glRasterPos3i(p1ScorePos.x, p1ScorePos.y, p1ScorePos.z);
     glutBitmapCharacter(GLUT_BITMAP_9_BY_15, p1);
 
     //player 2
     ////3dlocation
-    glRasterPos3i(0, 40,-38);
+    glRasterPos3i(p2ScorePos.x, p2ScorePos.y, p2ScorePos.z);
     glutBitmapCharacter(GLUT_BITMAP_9_BY_15, p2);
 }
 
@@ -84,4 +90,5 @@ void decreaseWinScore()
     else
         printf("Score is at minimum: %d\n", minScore);
 }
+
 #endif // SCOREDISPLAY_H_INCLUDED

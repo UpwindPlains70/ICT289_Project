@@ -1,24 +1,8 @@
-#ifndef GEOMETRY_H
-#define GEOMETRY_H
+#include "Geometry.h"
 
 #include <math.h>
 #include <GL/freeglut.h>
 #include <GL/glut.h>
-
-
-typedef GLfloat Point3D[3];
-
-typedef struct Face3D{
-    int x,y,z;
-}Face3D;
-
-typedef struct Object3D{
-    int nverts, nfaces;
-    Point3D *norms;
-    Point3D *vertices;
-    Face3D *faces;
-}Object3D;
-
 
 //Scales a vector by a given number
 //Pre-Condition: valid vector and scale number required
@@ -141,22 +125,9 @@ void calcCenterOfMass(Object3D obj, Point3D CoM){ /// changed from Point3D *CoM 
     //printf("%d %d %d\n", CoM[0], CoM[1], CoM[2]);
 }
 
-void UnitNormalVector(Point3D v1, Point3D v2, Point3D v3, Point3D destination){
-
-    destination[0] = ((v2[1] - v1[1]) * (v3[2] - v1[2])) - ((v2[2] - v1[2]) * (v3[1] - v1[1]));
-    destination[1] = ((v2[2] - v1[2]) * (v3[0] - v1[0])) - ((v2[0] - v1[0]) * (v3[2] - v1[2]));
-    destination[2] = ((v2[0] - v1[0]) * (v3[1] - v1[1])) - ((v2[1] - v1[1]) * (v3[0] - v1[0]));
-
-    float normLength = calcNormalLength(destination);
-
-    destination[0] = destination[0] / normLength;
-    destination[1] = destination[1] / normLength;
-    destination[2] = destination[2] / normLength;
-
-}
-
-void calcUnitNormalVector(Point3D v1, Point3D v2, Point3D destination){
-
+void calcUnitNormalVector(Point3D v1, Point3D v2, Point3D destination)
+{
+    //Point3D unitNormVec = {0,0,0};
     Point3D normVec;
     NormalVector(v1, v2, normVec);
 
@@ -165,24 +136,24 @@ void calcUnitNormalVector(Point3D v1, Point3D v2, Point3D destination){
     destination[0] = normVec[0] / normLength;
     destination[1] = normVec[1] / normLength;
     destination[2] = normVec[2] / normLength;
+
+   //return unitNormVec;
 }
 
-void pointCopy(Point3D source, Point3D *dest){
-
+void pointCopy(Point3D source, Point3D *dest)
+{
     *dest[0] = source[0];
     *dest[1] = source[1];
     *dest[2] = source[2];
 }
 
-double distanceFromSphereToPlane(Point3D sphereCoM, Point3D planeP1, Point3D planeP2, Point3D planeP3){
-
+double distanceFromSphereToPlane(Point3D sphereCoM, Point3D planeP1, Point3D planeP2, Point3D planeP3)
+{
     Point3D vectorOfSpherToPlane;
-    Point3D unitNormalVector;
-
     calcVector(sphereCoM, planeP1, vectorOfSpherToPlane);
 
-    UnitNormalVector(planeP1, planeP2, planeP3, unitNormalVector);
-
+    Point3D unitNormalVector;
+    calcUnitNormalVector(planeP1, planeP2, unitNormalVector);
     return fabs(DotProduct(vectorOfSpherToPlane, unitNormalVector));
 }
 
@@ -203,5 +174,4 @@ void draw3DObject(Object3D obj){
         glEnd();
     }
 }
-#endif // GEOMETRY_H
 

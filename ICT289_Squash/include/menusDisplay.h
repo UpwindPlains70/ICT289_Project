@@ -8,20 +8,13 @@
 #include "scoreDisplay.h"
 #include "player.h"
 #include "ball.h"
+#include "physics.h"
+#include "globalTimer.h"
 
-static char label[100];
-
-void
-drawString (char *s)
-{
-  unsigned int i;
-  for (i = 0; i < strlen (s); i++)
-    glutBitmapCharacter (GLUT_BITMAP_HELVETICA_10, s[i]);
-};
-
+const float backgroundColor[] = {0.8, 0.8, 0.8};
 void drawMenuBackground()
 {
-  glColor3f(0.8, 0.8, 0.8);
+  glColor3fv(backgroundColor);
   glBegin(GL_POLYGON);
         glVertex3f(10,8, -10);
         glVertex3f(10,50, -10);
@@ -30,10 +23,10 @@ void drawMenuBackground()
   glEnd();
 }
 
-void writeOptionsMenuDisplay(void)
+void writeOptionsMenuDisplay()
 {
     drawMenuBackground();
-  glColor3f(0.0, 0.0, 0.0);
+  glColor3fv(textColor);
   sprintf (label, "Options Menu");
   glRasterPos3i (12, 45,-24);
   drawString (label);
@@ -54,7 +47,7 @@ void writeOptionsMenuDisplay(void)
   drawString (label);
 
         ///Display ball bouncyness on start
-  sprintf (label, "Ball Bounciness on start = %.1f ", speedMod);
+  sprintf (label, "Ball Bounciness on start = %.1f ", dropOff);
   glRasterPos3i (12, 27,-13);
   drawString (label);
 
@@ -64,7 +57,7 @@ void writeHelpDisplay()
 {
   drawMenuBackground();
 
-  glColor3f(0.0, 0.0, 0.0);
+  glColor3fv(textColor);
   sprintf (label, "Help Menu");
   glRasterPos3i (12, 45,-26);
   drawString (label);
@@ -95,18 +88,20 @@ void writeHelpDisplay()
 
 void playerOneWinsDisplay()
 {
-  glColor3f(0.0, 0.0, 0.0);
+  glColor3fv(textColor);
   sprintf (label, "Player One Wins!!");
   glRasterPos3i (5, 36,-22);
   drawString (label);
+  gameStarted = false;
 }
 
 void playerTwoWinsDisplay()
 {
-  glColor3f(0.0, 0.0, 0.0);
+  glColor3fv(textColor);
   sprintf (label, "Player Two Wins!!");
   glRasterPos3i (5, 36,-22);
   drawString (label);
+  gameStarted = false;
 }
 
 #endif //OPTIONSDISPLAY_H

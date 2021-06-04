@@ -34,12 +34,14 @@
 			<Add option="-Wall" />
 		</Compiler>
 		<Unit filename="include/Geometry.h" />
+		<Unit filename="include/ObjectDisplay.h" />
 		<Unit filename="include/QuitHandler.h" />
 		<Unit filename="include/ReadOFFfile.h" />
 		<Unit filename="include/Room.h" />
 		<Unit filename="include/TextureLoader.h" />
 		<Unit filename="include/ball.h" />
 		<Unit filename="include/collisionDetectionAABB.h" />
+		<Unit filename="include/globalTimer.h" />
 		<Unit filename="include/menus.h" />
 		<Unit filename="include/menusDisplay.h" />
 		<Unit filename="include/physics.h" />

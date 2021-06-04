@@ -2,69 +2,91 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="include\physics.h" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="219" topLine="136" />
-		</Cursor>
-	</File>
 	<File name="include\scoreDisplay.h" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1055" topLine="34" />
+			<Cursor1 position="1739" topLine="5" />
 		</Cursor>
 	</File>
-	<File name="include\QuitHandler.h" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="main.c" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="974" topLine="10" />
+			<Cursor1 position="3120" topLine="82" />
+		</Cursor>
+		<Folding>
+			<Collapse line="52" />
+			<Collapse line="61" />
+			<Collapse line="72" />
+		</Folding>
+	</File>
+	<File name="include\ObjectDisplay.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1393" topLine="15" />
 		</Cursor>
 	</File>
-	<File name="include\Room.h" open="0" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="include\player.h" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="4644" topLine="133" />
+			<Cursor1 position="7094" topLine="280" />
 		</Cursor>
+		<Folding>
+			<Collapse line="61" />
+			<Collapse line="147" />
+		</Folding>
 	</File>
 	<File name="include\TextureLoader.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="253" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="include\menusDisplay.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="include\ball.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="462" topLine="72" />
-		</Cursor>
-	</File>
-	<File name="main.c" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="3174" topLine="101" />
-		</Cursor>
-	</File>
-	<File name="include\ball.h" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="735" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="include\player.h" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="429" topLine="3" />
-		</Cursor>
-	</File>
-	<File name="include\menus.h" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="440" topLine="7" />
+			<Cursor1 position="2111" topLine="7" />
 		</Cursor>
 	</File>
 	<File name="include\Geometry.h" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="4440" topLine="125" />
+			<Cursor1 position="811" topLine="26" />
+		</Cursor>
+	</File>
+	<File name="include\collisionDetectionAABB.h" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3830" topLine="0" />
+		</Cursor>
+		<Folding>
+			<Collapse line="46" />
+		</Folding>
+	</File>
+	<File name="include\globalTimer.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="618" topLine="14" />
+		</Cursor>
+	</File>
+	<File name="include\menus.h" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="712" topLine="157" />
+		</Cursor>
+	</File>
+	<File name="include\menusDisplay.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2572" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="include\physics.h" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="590" topLine="139" />
+		</Cursor>
+	</File>
+	<File name="include\QuitHandler.h" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="217" topLine="11" />
 		</Cursor>
 	</File>
 	<File name="include\ReadOFFfile.h" open="0" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="2139" topLine="0" />
+			<Cursor1 position="240" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="include\collisionDetectionAABB.h" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="include\Room.h" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1546" topLine="15" />
+			<Cursor1 position="3810" topLine="117" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

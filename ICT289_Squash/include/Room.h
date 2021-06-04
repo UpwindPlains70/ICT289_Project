@@ -1,40 +1,40 @@
 
 #include "Geometry.h"
 
-    Point3D leftWall[4] = { {0.0,0.0,0.0},  {0.0, 56.4, 0.0}, {0.0,56.4,-64.0}, {0.0, 0.0, -64.0} };
-    Point3D serviceLine[2] = { {0.0, 5.0, 0.0}, {0.0,5.0, -64.0} };
-    Point3D frontWallLine[4] = { {0.0, 45.7, 0.0}, {0.0, 17.8, 0.0},  {0.0, 17.8, -64.0} , {0.0, 45.7, -64.0}  };
-    Point3D HCL[2] = { {54.4,0.1,-64.0/2.0}, {54.4+42.1,0.1,-64.0/2.0 }   };
-    Point3D shortLine[2] = {  {54.4,0.1,0.0}, {54.4, 0.1, -64.0}  };
-    Point3D SB1[4]  = {  {54.4, 0.1, 0.0}, {54.4 + 16.0, 0.1, 0.0}, {54.4 + 16.0, 0.1, -64.0/4.0}, {54.4, 0.1, -64.0/4}   };
-    Point3D SB2[4] = { {54.4, 0.1, -64.0}, {54.4 + 16.0, 0.1, -64.0}, {54.4 + 16.0, 0.1, -3*(64.0/4.0)},
-        {54.4, 0.1, -3*(64.0/4.0)} };
-    Point3D backWallLine[2] = { {54.4 + 16.0 + 26.1, 21.3, 0.0}, {54.4 + 16.0 + 26.1, 21.3, -64.0}  };
+const Point3D frontWall[4] = { {0.0,0.0,0.0},  {0.0, 56.4, 0.0}, {0.0,56.4,-64.0}, {0.0, 0.0, -64.0} };
+const Point3D serviceLine[2] = { {0.0, 5.0, 0.0}, {0.0,5.0, -64.0} };
+const Point3D frontWallLine[4] = { {0.0, 45.7, 0.0}, {0.0, 17.8, 0.0},  {0.0, 17.8, -64.0} , {0.0, 45.7, -64.0}  };
+const Point3D HCL[2] = { {54.4,0.1,-64.0/2.0}, {54.4+42.1,0.1,-64.0/2.0 }   };
+const Point3D shortLine[2] = {  {54.4,0.1,0.0}, {54.4, 0.1, -64.0}  };
+const Point3D SB1[4]  = {  {54.4, 0.1, 0.0}, {54.4 + 16.0, 0.1, 0.0}, {54.4 + 16.0, 0.1, -64.0/4.0}, {54.4, 0.1, -64.0/4}   };
+const Point3D SB2[4] = { {54.4, 0.1, -64.0}, {54.4 + 16.0, 0.1, -64.0}, {54.4 + 16.0, 0.1, -3*(64.0/4.0)},
+    {54.4, 0.1, -3*(64.0/4.0)} };
+const Point3D backWallLine[2] = { {54.4 + 16.0 + 26.1, 21.3, 0.0}, {54.4 + 16.0 + 26.1, 21.3, -64.0}  };
 
-    Point3D backWall[4] = {  {54.4 + 16.0 + 26.1, 0.0, 0.0} , {54.4 + 16.0 + 26.1, 0.0, -64.0},
-        {54.4 + 16.0 + 26.1, 56.0, -64.0}, {54.4 + 16.0 + 26.1, 56.0, 0.0}       };
-    Point3D sideWall[4] = { {0.0,0.0,-64.0}, {0.0,56.4,-64.0}, {54.4 + 16.0 + 26.1 ,56.4,-64.0},
-        {54.4 + 16.0 + 26.1 ,0.0,-64.0}
-    };
-    Point3D leftSideWallLine[2] = { {0.0, 45.7, -64.0}, {54.4 + 16.0 + 26.1, 21.3, -64.0}  };
-    Point3D rightSideWallLine[2] = { {0.0, 45.7, 0.0}, {54.4 + 16.0 + 26.1, 21.3, 0.0}  };
-    Point3D frontWall[4] = { {0.0,0.0,0.0}, {0.0,56.4,0.0}, {54.4 + 16.0 + 26.1 ,56.4,0.0},
-        {54.4 + 16.0 + 26.1 ,0.0,0.0} };
-    Point3D roof[4] = { {0.0,56.4,0.0}, {0.0,56.4,-64.0}, {54.4 + 16.0 + 26.1, 56.4, -64.0}, {54.4 + 16.0 + 26.1, 56.4, 0.0}   };
-    Point3D gamefloor[4] = { {0.0,0.0,0.0}, {0.0,0.0,-64.0}, {54.4 + 16.0 + 26.1, 0.0, -64.0}, {54.4 + 16.0 + 26.1, 0.0, 0.0}   };
+const Point3D backWall[4] = {  {54.4 + 16.0 + 26.1, 0.0, 0.0} , {54.4 + 16.0 + 26.1, 0.0, -64.0},
+    {54.4 + 16.0 + 26.1, 56.0, -64.0}, {54.4 + 16.0 + 26.1, 56.0, 0.0}       };
+const Point3D rightWall[4] = { {0.0,0.0,-64.0}, {0.0,56.4,-64.0}, {54.4 + 16.0 + 26.1 ,56.4,-64.0},
+    {54.4 + 16.0 + 26.1 ,0.0,-64.0}
+};
+const Point3D rightSideWallLine[2] = { {0.0, 45.7, -64.0}, {54.4 + 16.0 + 26.1, 21.3, -64.0}  };
+const Point3D leftSideWallLine[2] = { {0.0, 45.7, 0.0}, {54.4 + 16.0 + 26.1, 21.3, 0.0}  };
+const Point3D leftWall[4] = { {0.0,0.0,0.0}, {0.0,56.4,0.0}, {54.4 + 16.0 + 26.1 ,56.4,0.0},
+    {54.4 + 16.0 + 26.1 ,0.0,0.0} };
+const Point3D roof[4] = { {0.0,56.4,0.0}, {0.0,56.4,-64.0}, {54.4 + 16.0 + 26.1, 56.4, -64.0}, {54.4 + 16.0 + 26.1, 56.4, 0.0}   };
+const Point3D gamefloor[4] = { {0.0,0.0,0.0}, {0.0,0.0,-64.0}, {54.4 + 16.0 + 26.1, 0.0, -64.0}, {54.4 + 16.0 + 26.1, 0.0, 0.0}   };
 
 void drawCourt(){
 
 
 
-            ///Backwall
+            ///Front wall
     glBegin(GL_POLYGON);
 
         glColor3f(1,1,1);
-        glVertex3fv(leftWall[0]);
-        glVertex3fv(leftWall[1]);
-        glVertex3fv(leftWall[2]);
-        glVertex3fv(leftWall[3]);
+        glVertex3fv(frontWall[0]);
+        glVertex3fv(frontWall[1]);
+        glVertex3fv(frontWall[2]);
+        glVertex3fv(frontWall[3]);
 
     glEnd();
 
@@ -115,18 +115,18 @@ void drawCourt(){
 
     glEnd();
 
-            ///Left wall
+            ///Right wall
     glBegin(GL_POLYGON);
 
         glColor3f(1,1,1);
-        glVertex3fv(sideWall[0]);
-        glVertex3fv(sideWall[1]);
-        glVertex3fv(sideWall[2]);
-        glVertex3fv(sideWall[3]);
+        glVertex3fv(rightWall[0]);
+        glVertex3fv(rightWall[1]);
+        glVertex3fv(rightWall[2]);
+        glVertex3fv(rightWall[3]);
 
     glEnd();
 
-            ///Left side line
+            ///left side line
     glBegin(GL_LINE_LOOP);
 
         glColor3f(0.0,0.0,0.0);
@@ -135,7 +135,7 @@ void drawCourt(){
 
     glEnd();
 
-            ///Right side line
+            ///right side line
     glBegin(GL_LINE_LOOP);
 
         glColor3f(0.0,0.0,0.0);
@@ -144,14 +144,14 @@ void drawCourt(){
 
     glEnd();
 
-            ///Right wall
+            ///Left wall
     glBegin(GL_POLYGON);
 
         glColor3f(1,1,1);
-        glVertex3fv(frontWall[0]);
-        glVertex3fv(frontWall[1]);
-        glVertex3fv(frontWall[2]);
-        glVertex3fv(frontWall[3]);
+        glVertex3fv(leftWall[0]);
+        glVertex3fv(leftWall[1]);
+        glVertex3fv(leftWall[2]);
+        glVertex3fv(leftWall[3]);
 
     glEnd();
 
@@ -176,7 +176,6 @@ void drawCourt(){
         glVertex3fv(gamefloor[3]);
 
     glEnd();
-
 
 }
 

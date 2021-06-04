@@ -1,23 +1,28 @@
 #ifndef COLLISIONDETECTIONAABB_H_INCLUDED
 #define COLLISIONDETECTIONAABB_H_INCLUDED
 #include <GL/freeglut.h>
-#include "Geometry.h"
 
-typedef int max[3]; // changing from size 2 to size 3
-typedef int min[3];
-max ma1,ma2;
-min mi1,mi2;
+#include "Geometry.h"
+#include "player.h"
+#include "Room.h"
+#include "ball.h"
+#include "globalTimer.h"
+
 
 GLfloat maxYFloat; /// use this make sure player isn't halfway through the ground
 GLfloat minYFloat;
+int c = 0;
+const int maxPlayerZ = 50; //Min = negative
+const int minPlayerZ = 5; //Min = negative
+const int minPlayerX = -60;
+const int maxPlayerX = 20;
 
+const int XcollisionBox = 10;
+const int YcollisionBox = 10;
+const int ZcollisionBox = 10;
 
-const XcollisionBox = 10;
-const YcollisionBox = 10;
-const ZcollisionBox = 10;
-
-BOOL hitBackWall = FALSE;
-
+const int maxFloorBounces = 2;
+//bool hitFrontWall = false;
 
 ///Used by display callback function in main
 void collisions(int i, ballObj *b){
@@ -32,98 +37,96 @@ void collisions(int i, ballObj *b){
         b->vecRackToBall[2] = b->currPos[2] - rackPos[i][2];
     /// checking if collision has occurred by checking the vector between the ball and racket, and seeing if its within this collision box defined by X,Y and Z value for collisionBox
      if((b->vecRackToBall[0] <= XcollisionBox && b->vecRackToBall[0] >= -XcollisionBox) && (b->vecRackToBall[1] <= YcollisionBox && b->vecRackToBall[1] >= -YcollisionBox) && (b->vecRackToBall[2] <= ZcollisionBox && b->vecRackToBall[2] >= -ZcollisionBox)  ){
-
+            b->hasHitBall[i] = true;
+            resetFloorHitCount(b);
 
             hitBallForce(b->currVel, b->prevVel, i); /// function in physics to apply force
-            hasHitBall[i] = TRUE;
         }
-
-
 }
 
 void playerWallCollision(){
     //none of these make any sense until you see how they move
-    for(int i = 0; i < 2; i++){
+    for(int i = 0; i < maxPlayers; i++){
         //back
-        if (playerArray[i].CoM[0] > 20){
-            playerArray[i].CoM[0] = 20;
+        if (playerArray[i].CoM[0] > maxPlayerX){
+            playerArray[i].CoM[0] = maxPlayerX;
         }
         //front
-        if (playerArray[i].CoM[0] < -55){
-            playerArray[i].CoM[0] = -55;
+        if (playerArray[i].CoM[0] < minPlayerX){
+            playerArray[i].CoM[0] = minPlayerX;
         }
         //left
         if(i==0){
-            if(playerArray[i].CoM[2] > 5){
-                playerArray[i].CoM[2] = 5;
+            if(playerArray[i].CoM[2] > minPlayerZ){
+                playerArray[i].CoM[2] = minPlayerZ;
             }
         }else if(i==1){
-            if(playerArray[i].CoM[2] > 50){
-                playerArray[i].CoM[2] = 50;
+            if(playerArray[i].CoM[2] > maxPlayerZ){
+                playerArray[i].CoM[2] = maxPlayerZ;
             }
         }
         //right
         if(i==0){
-            if(playerArray[i].CoM[2] < -50){
-                playerArray[i].CoM[2] = -50;
+            if(playerArray[i].CoM[2] < -maxPlayerZ){
+                playerArray[i].CoM[2] = -maxPlayerZ;
             }
         }else if(i==1){
-            if(playerArray[i].CoM[2] < -5){
-                playerArray[i].CoM[2] = -5;
+            if(playerArray[i].CoM[2] < -minPlayerZ){
+                playerArray[i].CoM[2] = -minPlayerZ;
             }
         }
-        //if(playerArray[i].CoM[2] < ){
-            //playerArray[i].CoM[2] = -64;
+    }
+}
+
+void checkIfOutOfBounds(ballObj *b){
+
+    if(b->currPos[1] >= frontWallLine[0][1] && b->hitFrontWall == true){
+        scoreHandler(b);
+    }else if(b->floorHitCount == maxFloorBounces){
+
+        printf("ball hit B %d\n", b->floorHitCount);
+        scoreHandler(b);
+        printf("ball hit A %d\n", b->floorHitCount);
+    }
+
+    b->hitFrontWall = false;
+}
+
+void scoreHandler(ballObj *b){
+
+    if(b->whoseTurn[0] == true){
+        /*if(b->hasHitBall[1] == true){
+            increaseP1Score();
+            b->hasHitBall[1] = false;
+        }else{*/
+            increaseP2Score();
+            b->hasHitBall[0] = false;
         //}
     }
-}
-
-
-
-
-void getMaxMin(Object3D bone,max ma, min mi){
-    unsigned xMax=0;
-    unsigned yMax=0;
-    unsigned zMax=0;
-    unsigned xMin=bone.vertices[0][0];
-    unsigned yMin=bone.vertices[0][1];
-    unsigned zMin=bone.vertices[0][2];
-
-    maxYFloat = 0.0;
-    minYFloat = 0.0;
-
-    for(int i = 0; i < bone.nverts; i++){
-            if(bone.vertices[i][0] >= xMax){
-                xMax = bone.vertices[i][0];
-            }else if(bone.vertices[i][0] < xMin){
-                xMin = bone.vertices[i][0];
-            }
-
-            if(bone.vertices[i][1] >= yMax){
-                yMax = bone.vertices[i][1];
-                maxYFloat = bone.vertices[i][1];
-            }else if(bone.vertices[i][1] >= yMin){
-                yMin = bone.vertices[i][1];
-                minYFloat = bone.vertices[i][1];
-            }
-
-            if(bone.vertices[i][2] >= zMax){
-                zMax = bone.vertices[i][2];
-            }else if(bone.vertices[i] >= zMin){
-                zMin = bone.vertices[i][2];
-            }
-
+    else if(b->whoseTurn[1] == true){
+        /*if(b->hasHitBall[0] == true){
+            increaseP2Score();
+            b->hasHitBall[0] = false;
+        }else{*/
+            increaseP1Score();
+            b->hasHitBall[1] = false;
+        //}
     }
-    ma[0] = xMax;
-    ma[1] = yMax;
-    ma[2] = zMax;
-    mi[0] = xMin;
-    mi[1] = yMin;
-    mi[2] = zMin;
+
+    if(b->hitFrontWall == false)
+        switchPlayerToHit(b);
+
+        resetBall(b);
 }
 
-
-
-
-
+    //Change which player is meant to pass the ball
+void switchPlayerToHit(ballObj *b){
+    if(b->whoseTurn[0] == true){
+        b->whoseTurn[0] = false;
+        b->whoseTurn[1] = true;
+    }else{
+        b->whoseTurn[1] = false;
+        b->whoseTurn[0] = true;
+    }
+}
 #endif // COLLISIONDETECTIONAABB_H_INCLUDED
