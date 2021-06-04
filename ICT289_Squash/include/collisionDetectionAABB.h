@@ -89,6 +89,19 @@ void checkIfOutOfBounds(ballObj *b){
     b->hitFrontWall = false;
 }
 
+void checkSideOutOfbounds(ballObj *b,float leftout, float rightout)
+{
+    if(leftout < ballArray[0].ballRadius){
+        scoreHandler(b);
+        //printf("L:::%f::%f\n",leftout,ballArray[0].ballRadius);
+    }
+
+    if(rightout < ballArray[0].ballRadius){
+        scoreHandler(b);
+        //printf("R:::%f::%f\n",rightout,ballArray[0].ballRadius);
+    }
+}
+
 void scoreHandler(ballObj *b){
 
     if(b->whoseTurn[0] == true){

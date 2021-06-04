@@ -71,9 +71,11 @@ void animate(void)
 
     }
 
-    distToLeftOut = distanceFromSphereToPlane(ballArray[0].currPos, leftSideWallLine[0], leftSideWallLine[1], leftWall[3]);
-    distToRightOut = distanceFromSphereToPlane(ballArray[0].currPos, rightSideWallLine[0], rightSideWallLine[1], rightWall[1]);
+    distToLeftOut = distanceFromSphereToPlane(ballArray[0].currPos, leftSideWallLine[0], leftSideWallLine[1], leftWall[1]-10);
+    distToRightOut = distanceFromSphereToPlane(ballArray[0].currPos, rightSideWallLine[0], rightSideWallLine[1], rightWall[1]+5);
 
+
+    checkSideOutOfbounds(&ballArray[0],distToLeftOut,distToRightOut);
         ///DOESN't WORK???
     /*if(distToLeftOut <= ballArray[0].ballRadius)
         printf("OUT LEFT\n");
@@ -125,7 +127,7 @@ void initPhysics(){
 
 const float hitSpeedX = 20.0;
 const float hitSpeedY = 15.0;
-const float hitSpeedZ = 1.2;
+const float hitSpeedZ = 20;
 
 void hitBallForce(Point3D curVel, Point3D preVel, int i){
 
