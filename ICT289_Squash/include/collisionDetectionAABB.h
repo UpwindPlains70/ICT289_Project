@@ -25,7 +25,7 @@ const int maxFloorBounces = 2;
 //bool hitFrontWall = false;
 
 ///Used by display callback function in main
-void collisions(int i, ballObj *b){
+void collisionPlayer(int i, ballObj *b){
         /// getting the position of the racket
         rackPos[i][0] = startingPos[i][0]  + playerArray[i].CoM[0];
         rackPos[i][1] = playerArray[i].CoM[1];
@@ -83,10 +83,7 @@ void checkIfOutOfBounds(ballObj *b){
     if(b->currPos[1] >= frontWallLine[0][1] && b->hitFrontWall == true){
         scoreHandler(b);
     }else if(b->floorHitCount == maxFloorBounces){
-
-        printf("ball hit B %d\n", b->floorHitCount);
         scoreHandler(b);
-        printf("ball hit A %d\n", b->floorHitCount);
     }
 
     b->hitFrontWall = false;

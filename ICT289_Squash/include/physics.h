@@ -125,7 +125,7 @@ void initPhysics(){
 
 const float hitSpeedX = 20.0;
 const float hitSpeedY = 15.0;
-const float hitSpeedZ = 1.0002;
+const float hitSpeedZ = 1.2;
 
 void hitBallForce(Point3D curVel, Point3D preVel, int i){
 

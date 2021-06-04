@@ -2,6 +2,7 @@
 #define OBJECTDISPLAY_H
 
 #include "player.h"
+#include "menus.h"
 
 void positionPlayer(){
     ///----------------------( drawing first character ) ------------------
@@ -12,7 +13,7 @@ void positionPlayer(){
         glRotatef(playerArray[0].currSwingAngle, 0, 1, 0);
         drawPlayer(0, playerColours[0]);          // passing index for player1, first element of player array and Array of a 3 element RGB array
         drawRacket(0);
-        collisions(0, &ballArray[0]);
+        collisionPlayer(0, &ballArray[0]);
 
     glPopMatrix();
 ///----------------------( drawing second character ) ----------
@@ -24,7 +25,7 @@ void positionPlayer(){
         glRotatef(playerArray[1].currSwingAngle, 0, 1, 0);
         drawPlayer(1, playerColours[1]); // passing index for player1, second element of player array
         drawRacket(1);
-        collisions(1, &ballArray[0]);
+        collisionPlayer(1, &ballArray[0]);
 
     glPopMatrix();
 
@@ -41,10 +42,12 @@ void menuHandler(){
     {
         playerOneWinsDisplay();
         gameStarted = false;
+        createMainMenu();
     }
     else if(gameWinner == p2){
         playerTwoWinsDisplay();
         gameStarted = false;
+        createMainMenu();
     }
 
         ///Add game ball to the world
