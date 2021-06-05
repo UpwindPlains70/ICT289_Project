@@ -39,16 +39,9 @@ void menuHandler(){
         writeHelpDisplay();
 
     if(gameWinner == p1)
-    {
         playerOneWinsDisplay();
-        gameStarted = false;
-        createMainMenu();
-    }
-    else if(gameWinner == p2){
+    else if(gameWinner == p2)
         playerTwoWinsDisplay();
-        gameStarted = false;
-        createMainMenu();
-    }
 
         ///Add game ball to the world
     if(gameStarted == true){

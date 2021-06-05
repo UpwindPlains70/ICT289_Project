@@ -1,32 +1,31 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <GL/freeglut.h>
-#include <GL/glut.h>
 
-#include "include/Geometry.h"
+#ifdef _WIN32
+    #include <GL/freeglut.h>
+#elif __APPLE__
+    #include <GLUT/glut.h>
+#endif
+
+#include "inputManager.h"
 #include "include/ReadOFFfile.h"
 #include "include/player.h"
-#include "include/globalTimer.h"
-//#include "include/Room.h"
-
-#include "include/scoreDisplay.h"
+#include "include/globals.h"
 #include "include/menus.h"
-//#include "include/ball.h"
-#include "include/physics.h"
-//#include "include/collisionDetectionAABB.h"
 #include "include/ObjectDisplay.h"
 
-static GLdouble viewer[]= {110.0, 40.0, -32.0, // initial camera location (across, up/down, distance to object)
+static const GLdouble viewer[]= {110.0, 40.0, -32.0, // initial camera location (across, up/down, distance to object)
                            0.0, 20.0, -32.0, // initial look at point
                            0.0, 1.0, 0.0};  // initial  upvector
 
     ///Perspective Camera specs
-GLdouble fov	 = 80;		// degrees
-GLdouble aspect	 = 1;		// aspect ratio aspect = height/width
-GLdouble nearVal = 0.1;
-GLdouble farVal  = 1000;     // near and far clipping planes
+const GLdouble fov	 = 80;		// degrees
+const GLdouble aspect	 = 1;		// aspect ratio aspect = height/width
+const GLdouble nearVal = 0.1;
+const GLdouble farVal  = 1000;     // near and far clipping planes
 
 void myinit(void){
+
         /* attributes */
     glEnable(GL_DEPTH_TEST);
     glClearColor(1.0, 1.0, 1.0, 1.0); /* draw on white background */
@@ -50,26 +49,6 @@ void myinit(void){
     glMatrixMode(GL_MODELVIEW);
 }
 
-void drawPlayer(int i, GLdouble colour[]){
-//Draw player (Capsule)
-
-    glColor3f(colour[0], colour[1], colour[2]);   // 0.4, 0.1, 0.1
-    glScaled(0.02,0.02,0.02);
-    draw3DObject(playerArray[i].charObj);
-
-}
-
-void drawRacket(int i){
-
- //Draw racket
-    //glRotatef(90, 0, 1,0);
-    glColor3f(0.6, 0.2, 0.2);
-    draw3DObject(playerArray[i].handle);
-    glColor3f(0.7,0.7,0.7);
-    draw3DObject(playerArray[i].pad);
-
-}
-
 void reshape (int w, int h){
    glViewport (0, 0, (GLsizei) w, (GLsizei) h);
    glMatrixMode (GL_PROJECTION);
@@ -77,16 +56,15 @@ void reshape (int w, int h){
    gluPerspective(fov, (GLfloat) w/(GLfloat) h, nearVal, farVal);
    glMatrixMode(GL_MODELVIEW);
    glLoadIdentity();
-   //gluLookAt (0.0, 0.0, 5.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
 }
 
 void display(void){
 
- glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
- glMatrixMode(GL_MODELVIEW);
- glLoadIdentity();
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
     ///Set camera pos, look at, & up vec
- gluLookAt(viewer[0], viewer[1], viewer[2],
+    gluLookAt(viewer[0], viewer[1], viewer[2],
            viewer[3], viewer[4], viewer[5],
            viewer[6], viewer[7], viewer[8]);
 
@@ -96,41 +74,39 @@ void display(void){
 
     glEnable(GL_NORMALIZE);
 
- if(gameEnding == true){
-    LoadImages(); ///Prevents game loading if done in myinit
-    DrawGroupCred();
- }else{
+    if(gameEnding == true){
+        LoadImages(); ///Prevents game loading if done in myinit
+        DrawGroupCred();
+    }else{
 
-    drawCourt();
+        drawCourt();
 
-    WriteScores();
+        WriteScores();
 
-    if(gameStarted == true)
-        writeWhoseTurn();
+        if(gameStarted == true)
+            writeWhoseTurn();
 
-        ///Show/hide menus
-    menuHandler();
+            ///Show/hide menus
+        menuHandler();
 
+        calcTimeSinceLastFrame();
+        setPrevTime();
 
-    calcTimeSinceLastFrame();
-    setPrevTime();
+        drawPowerBox();
 
-    drawPowerBox();
+        movePlayerB();
+        movePlayerA();
 
-    movePlayerB();
-    movePlayerA();
-
-    positionPlayer();
-
- }
+        positionPlayer();
+    }
 
     glDisable(GL_COLOR_MATERIAL);
     glutSwapBuffers();
 }
 
+    ///Read player objects
 void read3DObjects(){
-        //changing to read in data into all playerObjects from an array
-   Point3D tem;
+
     for(int i = 0; i < maxPlayers; i++){
         ReadOFFfile("objects/Capsule.off", &playerArray[i].charObj);
         ReadOFFfile("objects/Racket_Handle.off", &playerArray[i].handle);
@@ -138,14 +114,12 @@ void read3DObjects(){
 
         calcCenterOfMass(playerArray[i].charObj, playerArray[i].CoM ); /// added this each players COM
         calcCenterOfMass(playerArray[i].pad, playerArray[i].padCoM );
-
-        //getMaxMin(playerArray[i].charObj); /// so far only used this so I can get the players height
-        playerArray[i].charHieght = maxYFloat - minYFloat;
-
+        calcCenterOfMass(playerArray[i].handle, playerArray[i].handleCoM );
     }
 }
 
-int main(int argc, char** argv) {
+int main(int argc, char** argv){
+
     printf("Welcome to 'Squash Simulator'\n\n");
     printf("Right click game window for menu\n");
 

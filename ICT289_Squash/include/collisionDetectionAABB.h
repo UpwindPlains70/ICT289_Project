@@ -6,18 +6,14 @@
 #include "player.h"
 #include "Room.h"
 #include "ball.h"
-#include "globalTimer.h"
+#include "globals.h"
 
-
-GLfloat maxYFloat; /// use this make sure player isn't halfway through the ground
-GLfloat minYFloat;
-int c = 0;
 const int maxPlayerZ = 50; //Min = negative
 const int minPlayerZ = 5; //Min = negative
 const int minPlayerX = -60;
 const int maxPlayerX = 20;
 
-const int XcollisionBox = 10;
+const int XcollisionBox = 5;
 const int YcollisionBox = 10;
 const int ZcollisionBox = 10;
 
@@ -26,6 +22,7 @@ const int maxFloorBounces = 2;
 
 ///Used by display callback function in main
 void collisionPlayer(int i, ballObj *b){
+
         /// getting the position of the racket
         rackPos[i][0] = startingPos[i][0]  + playerArray[i].CoM[0];
         rackPos[i][1] = playerArray[i].CoM[1];
@@ -45,6 +42,7 @@ void collisionPlayer(int i, ballObj *b){
 }
 
 void playerWallCollision(){
+
     //none of these make any sense until you see how they move
     for(int i = 0; i < maxPlayers; i++){
         //back
@@ -89,40 +87,18 @@ void checkIfOutOfBounds(ballObj *b){
     b->hitFrontWall = false;
 }
 
-void checkSideOutOfbounds(ballObj *b,float leftout, float rightout)
-{
-    if(leftout < ballArray[0].ballRadius){
-        scoreHandler(b);
-        //printf("L:::%f::%f\n",leftout,ballArray[0].ballRadius);
-    }
-
-    if(rightout < ballArray[0].ballRadius){
-        scoreHandler(b);
-        //printf("R:::%f::%f\n",rightout,ballArray[0].ballRadius);
-    }
-}
-
 void scoreHandler(ballObj *b){
 
     if(b->whoseTurn[0] == true){
-        /*if(b->hasHitBall[1] == true){
-            increaseP1Score();
-            b->hasHitBall[1] = false;
-        }else{*/
-            increaseP2Score();
-            b->hasHitBall[0] = false;
-        //}
+        increaseP2Score();
+        b->hasHitBall[0] = false;
     }
     else if(b->whoseTurn[1] == true){
-        /*if(b->hasHitBall[0] == true){
-            increaseP2Score();
-            b->hasHitBall[0] = false;
-        }else{*/
-            increaseP1Score();
-            b->hasHitBall[1] = false;
-        //}
+        increaseP1Score();
+        b->hasHitBall[1] = false;
     }
 
+            ///Change turn due to successful ball pass
     if(b->hitFrontWall == false)
         switchPlayerToHit(b);
 
@@ -131,6 +107,7 @@ void scoreHandler(ballObj *b){
 
     //Change which player is meant to pass the ball
 void switchPlayerToHit(ballObj *b){
+
     if(b->whoseTurn[0] == true){
         b->whoseTurn[0] = false;
         b->whoseTurn[1] = true;

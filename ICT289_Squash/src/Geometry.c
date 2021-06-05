@@ -1,8 +1,5 @@
 #include "Geometry.h"
 
-#include <math.h>
-#include <GL/freeglut.h>
-#include <GL/glut.h>
 
 //Scales a vector by a given number
 //Pre-Condition: valid vector and scale number required

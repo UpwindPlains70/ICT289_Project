@@ -1,12 +1,14 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include <GL/freeglut.h>
-#include <GL/glut.h>
+#ifdef _WIN32
+    #include <GL/freeglut.h>
+#elif __APPLE__
+    #include <GLUT/glut.h>
+#endif
 
 #include "Geometry.h"
-#include "ReadOFFfile.h"
-#include "globalTimer.h"
+#include "globals.h"
 
 #define maxPlayers 2
 typedef enum {reset, hit, idle, powering, cooling} swingStates; ///animation control states for character swing
@@ -14,8 +16,6 @@ typedef enum {reset, hit, idle, powering, cooling} swingStates; ///animation con
 typedef struct playerObj{
     Object3D charObj;
     Point3D CoM;
-    float charHieght;
-    float charRadius;
     Point3D startPos;
 
     Object3D handle;
@@ -39,15 +39,14 @@ const float defaultSpeedMod = 100;
 
 float speedMod = 100; /// control the speed of all the movements
 
-BOOL keyboardKeys[256]; /// bool to know if a key is currently being pressed down or not, using this so both players can move at the same time
-BOOL arrowKeys[4];
-
 typedef GLdouble Colours[3];
 const Colours playerColours[2] = {{0.0, 0.0, 1.0},{0.0, 1.0, 0.0}};
 
 playerObj playerArray[maxPlayers];
 const Point3D startingPos[2] = { {70.0, 0.0, -10.0}, {70.0, 0.0, -55.0}  };   // 77.0, 0, -15.0); /// starting location of player1  // (77.0, 0 , -50.0); /// starting location of player2
 Point3D rackPos[2];
+const int maxPowerLevel = 10;
+
     ///Swing animation parameters
 //#define TIMERMSECS 150 /// callback frequency
 const int maxSwingAngle = 60; ///Max swing angle of players
@@ -57,6 +56,42 @@ const float minSwingSpeed = 180;
 const float defaultSwingSpeed = 200;
 
 float swingSpeed = 200; ///speed of swing & reset
+
+const float playerScale[] = {0.02,0.02,0.02};
+const float handleColor[] = {0.6, 0.2, 0.2};
+const float padColor[] = {0.7,0.7,0.7};
+
+const float increaseRate = 1.0;
+const float decreaseRate = 1.0;
+
+const float plyr2PowerBL[] = {5,8,-57};
+const float plyr2PowerTL[] = {5,8,-52};
+const float plyr2PowerTR[] = {5,13,-52};
+const float plyr2PowerBR[] = {5,13,-57};
+
+const float plyr1PowerBL[] = {5,8,-5};
+const float plyr1PowerTL[] = {5,8,-10};
+const float plyr1PowerTR[] = {5,13,-10};
+const float plyr1PowerBR[] = {5,13,-5};
+
+void drawPlayer(int i, GLdouble colour[]){
+//Draw player (Capsule)
+
+    glColor3f(colour[0], colour[1], colour[2]);   // 0.4, 0.1, 0.1
+    glScalef(playerScale[0], playerScale[1], playerScale[2]);
+    draw3DObject(playerArray[i].charObj);
+
+}
+
+    //Draw racket
+void drawRacket(int i){
+
+    glColor3fv(handleColor);
+    draw3DObject(playerArray[i].handle);
+    glColor3fv(padColor);
+    draw3DObject(playerArray[i].pad);
+
+}
 
     //Cannot be reused as animation functions can only have void parameter
 void playerOneSwing(void){
@@ -130,172 +165,26 @@ void playerTwoSwing(void){
     glutPostRedisplay();
 }
 
-void movePlayerB(){  // unsigned char key, int x, int y
-   if(keyboardKeys['w']) moveLeft(&playerArray[1]);
+void powerLevelHandler(playerObj *player){
+    if(player->swingMode != cooling || player->powerLevel == 1)
+            player->swingMode = powering;
 
-    if(keyboardKeys['a']) moveBack(&playerArray[1]);
-
-    if(keyboardKeys['s']) moveRight(&playerArray[1]);
-
-    if(keyboardKeys['d']) moveForward(&playerArray[1]);
-
-    if(keyboardKeys['q']) exit(0);
-
-    glutPostRedisplay();
-
-}
-
-void pressedSpecialDown(int key, int x, int y){
-    switch (key) {
-		case GLUT_KEY_UP:
-            arrowKeys[0] = TRUE;
-		    break;
-
-		case GLUT_KEY_LEFT:
-		    arrowKeys[1] = TRUE;
-		    break;
-
-		case GLUT_KEY_DOWN:
-            arrowKeys[2] = TRUE;
-		    break;
-
-		case GLUT_KEY_RIGHT:
-            arrowKeys[3] = TRUE;
-		    break;
-	}
-}
-
-void pressedSpecialUp(int key, int x, int y){
-
-    switch (key) {
-		case GLUT_KEY_UP:
-            arrowKeys[0] = FALSE;
-		    break;
-		case GLUT_KEY_LEFT:
-		    arrowKeys[1] = FALSE;
-		    break;
-		case GLUT_KEY_DOWN:
-            arrowKeys[2] = FALSE;
-		    break;
-		case GLUT_KEY_RIGHT:
-            arrowKeys[3] = FALSE;
-		    break;
-	}
-}
-
-void pressedDown(unsigned char key, int x, int y){
-
-    keyboardKeys[key] = TRUE;
-
-    if(key == 'f' || key == 'F')
-    {
-        if(playerArray[1].swingMode != cooling || playerArray[1].powerLevel == 1)
-            playerArray[1].swingMode = powering;
-
-        if(playerArray[1].powerLevel < 10 && playerArray[1].swingMode != cooling)
-            playerArray[1].powerLevel++;
-        else{
-            playerArray[1].powerLevel--;
-            playerArray[1].swingMode = cooling;
-        }
+    if(player->powerLevel < maxPowerLevel && player->swingMode != cooling)
+        player->powerLevel++;
+    else{
+        player->powerLevel--;
+        player->swingMode = cooling;
     }
-
-    if(key == ' ')
-    {
-        if(playerArray[0].swingMode != cooling || playerArray[0].powerLevel == 1)
-            playerArray[0].swingMode = powering;
-
-        if(playerArray[0].powerLevel < 10 && playerArray[0].swingMode != cooling)
-            playerArray[0].powerLevel++;
-        else{
-            playerArray[0].powerLevel--;
-            playerArray[0].swingMode = cooling;
-        }
-        glutPostRedisplay();
-    }
-
-        ///Edit light position
-    /*
-    printf("light pos: x: %f, y:%f, z: %f\n", light_position[0], light_position[1], light_position[2]);
-    if(keyboardKeys['t']) light_position[0]++;
-    if(keyboardKeys['y']) light_position[1]++;
-    if(keyboardKeys['u']) light_position[2]++;
-
-    if(keyboardKeys['T']) light_position[0]--;
-    if(keyboardKeys['Y']) light_position[1]--;
-    if(keyboardKeys['U']) light_position[2]--;
-
-    glLightfv(GL_LIGHT0,GL_POSITION,light_position);*/
-
-    if(keyboardKeys['1']) printf("num pes");
-}
-
-void pressedUp(unsigned char key, int x, int y)
-{
-    keyboardKeys[key] = FALSE;
-
-    if(key == 'f' || key == 'F')
-    {
-        playerArray[1].swingMode = hit;
-        glutTimerFunc(TIMERMSECSB, playerTwoSwing, 0);
-    }
-
-    if(key == ' ')
-    {
-        playerArray[0].swingMode = hit;
-        glutTimerFunc(TIMERMSECSA, playerOneSwing, 0);
-    }
-}
-
-void movePlayerA(){
-        //UP
-    if(arrowKeys[0]) moveLeft(&playerArray[0]);
-        //left
-    if(arrowKeys[1]) moveBack(&playerArray[0]);
-        //down
-    if(arrowKeys[2]) moveRight(&playerArray[0]);
-        //right
-    if(arrowKeys[3]) moveForward(&playerArray[0]);
-
-    glutPostRedisplay();
-}
-
-void moveForward(playerObj *obj){ /// changing from using hard coded &playerA.charObj to the passed parameter
-
-    obj->CoM[2] += -timeSincePrevFrame * speedMod;
-
-    obj->padCoM[2] += -timeSincePrevFrame * speedMod;
-}
-
-void moveBack(playerObj *obj){
-
-    obj->padCoM[2] += timeSincePrevFrame * speedMod;
-
-    obj->CoM[2] += timeSincePrevFrame * speedMod;
-}
-
-void moveLeft(playerObj *obj){
-
-    obj->CoM[0] += -timeSincePrevFrame * speedMod;
-
-    obj->padCoM[0] += -timeSincePrevFrame * speedMod;
-}
-
-void moveRight(playerObj *obj){
-
-    obj->CoM[0] += timeSincePrevFrame * speedMod;
-
-    obj->padCoM[0] += timeSincePrevFrame * speedMod;
 }
 
 void drawPlayerTwoPower(){
 
     glColor3f(0+playerArray[1].powerLevel/10.0,1-playerArray[1].powerLevel/10.0,0);
     glBegin(GL_POLYGON);
-        glVertex3f(5,8,-57);
-        glVertex3f(5,8,-52);
-        glVertex3f(5,13,-52);
-        glVertex3f(5,13,-57);
+        glVertex3fv(plyr2PowerBL);
+        glVertex3fv(plyr2PowerTL);
+        glVertex3fv(plyr2PowerTR);
+        glVertex3fv(plyr2PowerBR);
     glEnd();
 }
 
@@ -303,10 +192,10 @@ void drawPlayerOnePower(){
 
     glColor3f(0+playerArray[0].powerLevel/10.0,1-playerArray[0].powerLevel/10.0,0);
     glBegin(GL_POLYGON);
-        glVertex3f(5,8,-5);
-        glVertex3f(5,8,-10);
-        glVertex3f(5,13,-10);
-        glVertex3f(5,13,-5);
+        glVertex3fv(plyr1PowerBL);
+        glVertex3fv(plyr1PowerTL);
+        glVertex3fv(plyr1PowerTR);
+        glVertex3fv(plyr1PowerBR);
     glEnd();
 }
 
@@ -329,7 +218,7 @@ void decreasePlayerSpeed(){
 void increaseSwingSpeed(){
 
     if(swingSpeed < maxSwingSpeed)
-        swingSpeed++;
+        swingSpeed += increaseRate;
     else
         printf("Swing speed is at maximum: %f\n", swingSpeed);
 }
@@ -337,7 +226,7 @@ void increaseSwingSpeed(){
 void decreaseSwingSpeed(){
 
     if(swingSpeed > minSwingSpeed)
-        swingSpeed--;
+        swingSpeed -= decreaseRate;
     else
         printf("Swing speed is at minimum: %f\n", swingSpeed);
 }

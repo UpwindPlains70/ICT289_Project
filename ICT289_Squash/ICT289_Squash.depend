@@ -5,47 +5,44 @@
 	"Geometry.h"
 	"ReadOFFfile.h"
 
-1622780544 c:\users\peter\documents\github\ict289_project\ict289_squash\include\geometry.h
+1622874357 c:\users\peter\documents\github\ict289_project\ict289_squash\include\geometry.h
 	<math.h>
 	<GL/freeglut.h>
 	<GL/glut.h>
 
-1622694196 c:\users\peter\documents\github\ict289_project\ict289_squash\include\readofffile.h
+1622874156 c:\users\peter\documents\github\ict289_project\ict289_squash\include\readofffile.h
 	<stdio.h>
 	<stdlib.h>
 	"Geometry.h"
 
-1622793996 source:c:\users\peter\documents\github\ict289_project\ict289_squash\main.c
+1622879809 source:c:\users\peter\documents\github\ict289_project\ict289_squash\main.c
 	<stdio.h>
 	<stdlib.h>
 	<GL/freeglut.h>
-	<GL/glut.h>
-	"include/Geometry.h"
+	<GLUT/glut.h>
+	"inputManager.h"
 	"include/ReadOFFfile.h"
 	"include/player.h"
-	"include/globalTimer.h"
-	"include/scoreDisplay.h"
+	"include/globals.h"
 	"include/menus.h"
-	"include/physics.h"
 	"include/ObjectDisplay.h"
 
-1622794282 c:\users\peter\documents\github\ict289_project\ict289_squash\include\player.h
+1622879563 c:\users\peter\documents\github\ict289_project\ict289_squash\include\player.h
 	<GL/freeglut.h>
-	<GL/glut.h>
+	<GLUT/glut.h>
 	"Geometry.h"
-	"ReadOFFfile.h"
-	"globalTimer.h"
+	"globals.h"
 
-1622780867 c:\users\peter\documents\github\ict289_project\ict289_squash\include\room.h
+1622866191 c:\users\peter\documents\github\ict289_project\ict289_squash\include\room.h
 	"Geometry.h"
 
-1622795462 c:\users\peter\documents\github\ict289_project\ict289_squash\include\collisiondetectionaabb.h
+1622880013 c:\users\peter\documents\github\ict289_project\ict289_squash\include\collisiondetectionaabb.h
 	<GL/freeglut.h>
 	"Geometry.h"
 	"player.h"
 	"Room.h"
 	"ball.h"
-	"globalTimer.h"
+	"globals.h"
 
 1620570450 source:c:\ict289\groupproject\ict289_project-main\ict289_squash\main.c
 	<stdio.h>
@@ -608,49 +605,49 @@
 1622794660 c:\users\ray\onedrive\documents\github\ict289_project\ict289_squash\include\room.h
 	"Geometry.h"
 
-1622694393 c:\users\peter\documents\github\ict289_project\ict289_squash\include\scoredisplay.h
+1622878079 c:\users\peter\documents\github\ict289_project\ict289_squash\include\scoredisplay.h
 	"Geometry.h"
+	"globals.h"
 
-1622794296 c:\users\peter\documents\github\ict289_project\ict289_squash\include\menus.h
+1622875595 c:\users\peter\documents\github\ict289_project\ict289_squash\include\menus.h
 	<GL/freeglut.h>
-	<GL/glut.h>
+	<GLUT/glut.h>
 	"scoreDisplay.h"
 	"player.h"
+	"ball.h"
+	"physics.h"
 	"menusDisplay.h"
-	"ball.h"
 	"QuitHandler.h"
-	"physics.h"
-	"globalTimer.h"
-	"physics.h"
+	"globals.h"
 
-1622793257 c:\users\peter\documents\github\ict289_project\ict289_squash\include\menusdisplay.h
-	<stdio.h>
-	<GL/freeglut.h>
-	<GL/glut.h>
-	"scoreDisplay.h"
-	"player.h"
-	"ball.h"
-	"physics.h"
-	"globalTimer.h"
-
-1622789005 c:\users\peter\documents\github\ict289_project\ict289_squash\include\ball.h
-	"globalTimer.h"
-
-1622621497 c:\users\peter\documents\github\ict289_project\ict289_squash\include\quithandler.h
-	"TextureLoader.h"
-
-1622618965 c:\users\peter\documents\github\ict289_project\ict289_squash\include\textureloader.h
+1622878870 c:\users\peter\documents\github\ict289_project\ict289_squash\include\menusdisplay.h
 	<stdio.h>
 	<GL/freeglut.h>
 	<GLUT/glut.h>
+	"scoreDisplay.h"
+	"player.h"
+	"ball.h"
+	"physics.h"
+	"globals.h"
 
-1622795691 c:\users\peter\documents\github\ict289_project\ict289_squash\include\physics.h
+1622880047 c:\users\peter\documents\github\ict289_project\ict289_squash\include\ball.h
+	"globals.h"
+	"Geometry.h"
+
+1622874947 c:\users\peter\documents\github\ict289_project\ict289_squash\include\quithandler.h
+	<GL/freeglut.h>
+	<GLUT/glut.h>
+
+1622874584 c:\users\peter\documents\github\ict289_project\ict289_squash\include\textureloader.h
+	<GL/freeglut.h>
+	<GLUT/glut.h>
+
+1622879949 c:\users\peter\documents\github\ict289_project\ict289_squash\include\physics.h
 	"ball.h"
 	"player.h"
 	"collisionDetectionAABB.h"
-	"globalTimer.h"
 
-1622795847 c:\users\peter\documents\github\ict289_project\ict289_squash\include\objectdisplay.h
+1622878915 c:\users\peter\documents\github\ict289_project\ict289_squash\include\objectdisplay.h
 	"player.h"
 	"menus.h"
 
@@ -658,30 +655,59 @@
 	"objectdisplay.h"
 	"player.h"
 
-1622693875 source:c:\users\peter\documents\github\ict289_project\ict289_squash\src\geometry.c
+1622874703 source:c:\users\peter\documents\github\ict289_project\ict289_squash\src\geometry.c
 	"Geometry.h"
-	<math.h>
-	<GL/freeglut.h>
-	<GL/glut.h>
 
-1622693126 source:c:\users\peter\documents\github\ict289_project\ict289_squash\src\readofffile.c
+1622874727 source:c:\users\peter\documents\github\ict289_project\ict289_squash\src\readofffile.c
 	<stdio.h>
 	<stdlib.h>
+	"../include/ReadOFFfile.h"
 	"Geometry.h"
-	"ReadOFFfile.h"
 
-1622693754 source:c:\users\peter\documents\github\ict289_project\ict289_squash\src\player.c
-	"player.h"
-	<GL/freeglut.h>
-	<GL/glut.h>
+1622875281 source:c:\users\peter\documents\github\ict289_project\ict289_squash\src\player.c
+	"../include/player.h"
+	<stdio.h>
 	"Geometry.h"
-	"ReadOFFfile.h"
+	"globals.h"
 
-1622790247 c:\users\peter\documents\github\ict289_project\ict289_squash\include\globaltimer.h
+1622799985 c:\users\peter\documents\github\ict289_project\ict289_squash\include\globaltimer.h
 
 1622794660 c:\users\ray\onedrive\documents\github\ict289_project\ict289_squash\include\globaltimer.h
 
 1622796379 c:\users\ray\onedrive\documents\github\ict289_project\ict289_squash\include\objectdisplay.h
 	"player.h"
 	"menus.h"
+
+1622880001 c:\users\peter\documents\github\ict289_project\ict289_squash\include\globals.h
+	<GL/freeglut.h>
+	<GLUT/glut.h>
+
+1622859769 c:\users\peter\documents\github\ict289_project\ict289_squash\include\scoremenuhandler.h
+
+1622874666 source:c:\users\peter\documents\github\ict289_project\ict289_squash\src\globals.c
+	"../include/globals.h"
+	<GL/freeglut.h>
+
+1622874563 source:c:\users\peter\documents\github\ict289_project\ict289_squash\src\textureloader.c
+	"../include/TextureLoader.h"
+	<stdio.h>
+
+1622874926 source:c:\users\peter\documents\github\ict289_project\ict289_squash\src\quithandler.c
+	"../include/QuitHandler.h"
+	"TextureLoader.h"
+
+1622872751 source:c:\users\peter\documents\github\ict289_project\ict289_squash\src\ball.c
+	"../include/ball.h"
+	"../include/globals.h"
+	<stdio.h>
+	<stdlib.h>
+
+1622878034 c:\users\peter\documents\github\ict289_project\ict289_squash\include\input.h
+	"player.h"
+
+1622879286 c:\users\peter\documents\github\ict289_project\ict289_squash\include\inputmanager.h
+	"player.h"
+	"physics.h"
+	"scoreDisplay.h"
+	"globals.h"
 

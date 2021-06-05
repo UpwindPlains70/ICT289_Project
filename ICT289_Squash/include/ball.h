@@ -1,7 +1,8 @@
 #ifndef BALL_H
 #define BALL_H
 
-#include "globalTimer.h"
+#include "globals.h"
+#include "Geometry.h"
 
 //ball initial position
 const Point3D startPos = {20, 40, -20}; ///Serve pos for player One
@@ -29,19 +30,24 @@ typedef struct ballObj{
 
 ballObj ballArray[1];
 
-void drawGameBall(ballObj *b)
-{
+const int plyr1PassDisp[] = {5, 50,-5};
+const int plyr2PassDisp[] = {5, 50,-38};
+
+void drawGameBall(ballObj *b){
+
     glColor3fv(b->ballColor);
     glTranslatef(b->currPos[0], b->currPos[1], b->currPos[2]);
     glutSolidSphere(b->ballRadius,15,15);
 }
 
-void resetBall(ballObj *b)
-{
+void resetBall(ballObj *b){
+
     b->ballRadius = 2.5;
 
     setBallVelocity(b);
+        ///Need to reset floor count twice otherwise it may not work resulting in an instant point
     resetFloorHitCount(b);
+    b->floorHitCount = 0;
 
         ///Player one always serves first
     if(gameStarted == false)
@@ -66,35 +72,38 @@ void resetBall(ballObj *b)
     //Can be modifiead to be random values
     //For this project preset values are used (only one ball)
 void setBallVelocity(ballObj *b){
+
     b->v0[0] = 100;
     b->v0[1] = 0;
     b->v0[2] = 0;
 }
 
 void resetFloorHitCount(ballObj *b){
+
     b->floorHitCount = 0;
 }
 
-void resetBallColor(ballObj *b)
-{
+void resetBallColor(ballObj *b){
+
     b->ballColor[0] = 0;
     b->ballColor[1] = 0;
     b->ballColor[2] = 0;
 }
 
     ///Only applicable to single ball game
-void writeWhoseTurn()
-{
+void writeWhoseTurn(){
+
     if(ballArray[0].whoseTurn[0] == true)
         playerOneTurn();
     else if(ballArray[0].whoseTurn[1] == true)
         playerTwoTurn();
 }
+
 void playerOneTurn(){
 
   glColor3fv(textColor);
   sprintf (label, "Player One Pass");
-  glRasterPos3i (5, 50,-5);
+  glRasterPos3iv(plyr1PassDisp);
   drawString (label);
 }
 
@@ -102,7 +111,7 @@ void playerTwoTurn(){
 
     glColor3fv(textColor);
     sprintf (label, "Player Two's Pass");
-    glRasterPos3i (5, 50,-38);
+    glRasterPos3iv(plyr2PassDisp);
     drawString (label);
 }
 #endif //ball_H

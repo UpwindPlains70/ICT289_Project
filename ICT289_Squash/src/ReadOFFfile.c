@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
+
+#include "../include/ReadOFFfile.h"
 #include "Geometry.h"
-#include "ReadOFFfile.h"
 
 //Reads an OFF storing data in passed Object3D
 //Pre-condition: Existing file name and Object3D variable

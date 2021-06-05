@@ -1,35 +1,16 @@
 #ifndef QUITHANDLER_H
 #define QUITHANDLER_H
 
-#include "TextureLoader.h"
+//#include "TextureLoader.h"
+#ifdef _WIN32
+    #include <GL/freeglut.h>
+#elif __APPLE__
+    #include <GLUT/glut.h>
+#endif
 
 GLuint texID;
-void LoadImages()
-{
-    texID = LoadTexture("textures/GroupPic.raw", 946, 437, 4);
-}
+void LoadImages();
 
-void DrawGroupCred()
-{
-        glPushMatrix();
-            glBindTexture(GL_TEXTURE_2D, texID);
-            glRotatef(190,0,0,1);
-            glScalef(5,5,5);
-            glTranslatef(0,-30,25);
-            glBegin(GL_QUADS);
-                glTexCoord2f(0.0, 0.0);
-                glVertex3f(10,8, -10);
-
-                glTexCoord2f(0.0, 1.0);
-                glVertex3f(10,50, -10);
-
-                glTexCoord2f(1.0, 1.0);
-                glVertex3f(10,50, -55);
-
-                glTexCoord2f(1.0, 0.0);
-                glVertex3f(10,8, -55);
-            glEnd();
-        glPopMatrix();
-}
+void DrawGroupCred();
 
 #endif // QUITHANDLER_H

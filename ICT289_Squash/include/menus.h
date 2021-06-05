@@ -1,47 +1,52 @@
 #ifndef MENUS_H
 #define MENUS_H
 
-#include <GL/freeglut.h>
-#include <GL/glut.h>
+#ifdef _WIN32
+    #include <GL/freeglut.h>
+#elif __APPLE__
+    #include <GLUT/glut.h>
+#endif
 
+    ///Include for customizization
 #include "scoreDisplay.h"
 #include "player.h"
-#include "menusDisplay.h"
 #include "ball.h"
-#include "QuitHandler.h"
-#include "physics.h"
-#include "globalTimer.h"
 #include "physics.h"
 
-void processMainMenuEvents(int option);
+#include "menusDisplay.h"
+#include "QuitHandler.h"
+#include "globals.h"
 
     //Light
 const GLfloat light_position[] = {-28.0, -14.0, -92.0,1};
 
+void processMainMenuEvents(int option);
+
 void createMainMenu();
 
-void startGame()
-{
+
+void startGame(){
+
     glLightfv(GL_LIGHT0,GL_POSITION,light_position);
     resetPlayerPos();
     resetBall(&ballArray[0]); ///Reset ball positio
     resetBallColor(&ballArray[0]); ///Reset ball color
     initPhysics(); ///Reset physics
     gameStarted = true; ///Allows ball to spawn
-    glutTimerFunc(TIMER, animate, 0); ///Ball physics
+    glutTimerFunc(TIMER, physics, 0); ///Ball physics
     newGame(); ///Reset scoreboard
 }
 
-void resetGameSettings()
-{
+void resetGameSettings(){
+
     speedMod = defaultSpeedMod; ///Reset player speed
     swingSpeed = defaultSwingSpeed; ///Reset swing speed
     dropOff = defaultDropOff;  ///Reset ball start bounciness
     winScore = defaultWinScore;///reset points to win
 }
 
-void processOptionsEvents(int option)
-{
+void processOptionsEvents(int option){
+
     switch(option)
     {
     case 1: ///Increase player speed
@@ -75,9 +80,7 @@ void processOptionsEvents(int option)
     }
 }
 
-void optionsMenu()
-{
-    int menu;
+void optionsMenu(){
 
 	// create the menu and
 	// tell glut that "processMenuEvents" will
@@ -103,8 +106,8 @@ void optionsMenu()
 	glutAttachMenu(GLUT_RIGHT_BUTTON);
 }
 
-void processHelpEvents(int option)
-{
+void processHelpEvents(int option){
+
     switch(option)
     {
     case 1:
@@ -118,9 +121,7 @@ void processHelpEvents(int option)
     }
 }
 
-void helpMenu()
-{
-    int menu;
+void helpMenu(){
 
 	// create the menu and
 	// tell glut that "processMenuEvents" will
@@ -135,9 +136,7 @@ void helpMenu()
 	glutAttachMenu(GLUT_RIGHT_BUTTON);
 }
 
-void createQuitMenu()
-{
-    int menu;
+void createQuitMenu(){
 
 	// create the menu and
 	// tell glut that "processMenuEvents" will
@@ -151,13 +150,9 @@ void createQuitMenu()
 	glutAttachMenu(GLUT_RIGHT_BUTTON);
 }
 
-void processMainMenuEvents(int option) {
+void processMainMenuEvents(int option){
 
 	switch (option) {
-        case 0 : ///Pause game
-             gamePaused = true;
-             createMainMenu();
-             break;
 		case 1 : ///Start Round (spawn ball & set pos)
              startGame();
              createMainMenu();
@@ -183,9 +178,7 @@ void processMainMenuEvents(int option) {
 	}
 }
 
-void createMainMenu() {
-
-	int menu;
+void createMainMenu(){
 
 	// create the menu and
 	// tell glut that "processMenuEvents" will
