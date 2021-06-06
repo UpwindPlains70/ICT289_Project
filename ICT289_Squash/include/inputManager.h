@@ -36,6 +36,8 @@ void pressedSpecialUp(int key, int x, int y){
 
     ///Catch normal key release
 
+    ///Catch normal key release
+
     switch (key) {
 		case GLUT_KEY_UP:
             arrowKeys[0] = FALSE;
@@ -66,65 +68,6 @@ void pressedUp(unsigned char key, int x, int y){
         glutTimerFunc(TIMERMSECSA, playerOneSwing, 0);
     }
 }
-
-    ///Move player 1
-void movePlayerA(){
-
-        //UP
-    if(arrowKeys[0]) moveLeft(&playerArray[0]);
-        //left
-    if(arrowKeys[1]) moveBack(&playerArray[0]);
-        //down
-    if(arrowKeys[2]) moveRight(&playerArray[0]);
-        //right
-    if(arrowKeys[3]) moveForward(&playerArray[0]);
-
-    glutPostRedisplay();
-}
-    ///Move player 2
-void movePlayerB(){  // unsigned char key, int x, int y
-   if(keyboardKeys['w']) moveLeft(&playerArray[1]);
-
-    if(keyboardKeys['a']) moveBack(&playerArray[1]);
-
-    if(keyboardKeys['s']) moveRight(&playerArray[1]);
-
-    if(keyboardKeys['d']) moveForward(&playerArray[1]);
-
-    if(keyboardKeys['q']) exit(0);
-
-    glutPostRedisplay();
-
-}
-
-void moveForward(playerObj *obj){ /// changing from using hard coded &playerA.charObj to the passed parameter
-
-    obj->CoM[2] += -timeSincePrevFrame * speedMod;
-
-    obj->padCoM[2] += -timeSincePrevFrame * speedMod;
-}
-
-void moveBack(playerObj *obj){
-
-    obj->padCoM[2] += timeSincePrevFrame * speedMod;
-
-    obj->CoM[2] += timeSincePrevFrame * speedMod;
-}
-
-void moveLeft(playerObj *obj){
-
-    obj->CoM[0] += -timeSincePrevFrame * speedMod;
-
-    obj->padCoM[0] += -timeSincePrevFrame * speedMod;
-}
-
-void moveRight(playerObj *obj){
-
-    obj->CoM[0] += timeSincePrevFrame * speedMod;
-
-    obj->padCoM[0] += timeSincePrevFrame * speedMod;
-}
-
 
     ///Catch normal key press
 void pressedDown(unsigned char key, int x, int y){
@@ -171,6 +114,64 @@ void pressedDown(unsigned char key, int x, int y){
     if(keyboardKeys['U']) light_position[2]--;
 
     glLightfv(GL_LIGHT0,GL_POSITION,light_position);*/
+}
+
+    ///Move player 1
+void movePlayerA(){
+
+        //UP
+    if(arrowKeys[0]) moveLeft(&playerArray[0]);
+        //left
+    if(arrowKeys[1]) moveBack(&playerArray[0]);
+        //down
+    if(arrowKeys[2]) moveRight(&playerArray[0]);
+        //right
+    if(arrowKeys[3]) moveForward(&playerArray[0]);
+
+    glutPostRedisplay();
+}
+    ///Move player 2
+void movePlayerB(){  // unsigned char key, int x, int y
+   if(keyboardKeys['w']) moveLeft(&playerArray[1]);
+
+    if(keyboardKeys['a']) moveBack(&playerArray[1]);
+
+    if(keyboardKeys['s']) moveRight(&playerArray[1]);
+
+    if(keyboardKeys['d']) moveForward(&playerArray[1]);
+
+    if(keyboardKeys['q']) exit(0);
+
+    glutPostRedisplay();
+
+}
+
+void moveForward(playerObj *obj){
+
+    obj->CoM[2] += -timeSincePrevFrame * speedMod;
+
+    obj->padCoM[2] += -timeSincePrevFrame * speedMod;
+}
+
+void moveBack(playerObj *obj){
+
+    obj->padCoM[2] += timeSincePrevFrame * speedMod;
+
+    obj->CoM[2] += timeSincePrevFrame * speedMod;
+}
+
+void moveLeft(playerObj *obj){
+
+    obj->CoM[0] += -timeSincePrevFrame * speedMod;
+
+    obj->padCoM[0] += -timeSincePrevFrame * speedMod;
+}
+
+void moveRight(playerObj *obj){
+
+    obj->CoM[0] += timeSincePrevFrame * speedMod;
+
+    obj->padCoM[0] += timeSincePrevFrame * speedMod;
 }
 
 #endif // INPUT_H

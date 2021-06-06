@@ -8,9 +8,13 @@
     #include <GLUT/glut.h>
 #endif
 
+    ///Hold read/loaded image
 GLuint texID;
+
+    //load image (hard coded)
 void LoadImages();
 
+    //Displays image stored in texID
 void DrawGroupCred();
 
 #endif // QUITHANDLER_H

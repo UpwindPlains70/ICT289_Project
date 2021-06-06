@@ -28,11 +28,6 @@ typedef struct playerObj{
     int powerLevel;
 }playerObj;
 
-
-//float startTime, prevTime;
-//float currTime;
-//float timeSincePrevFrame;
-
 const float maxSpeedMod = 150; ///Allows for adjustable player speed
 const float minSpeedMod = 80;
 const float defaultSpeedMod = 100;
@@ -57,23 +52,28 @@ const float defaultSwingSpeed = 200;
 
 float swingSpeed = 200; ///speed of swing & reset
 
+    ///Player settings (scale, color)
 const float playerScale[] = {0.02,0.02,0.02};
 const float handleColor[] = {0.6, 0.2, 0.2};
 const float padColor[] = {0.7,0.7,0.7};
 
+    ///Rates of change for customizable parameters
 const float increaseRate = 1.0;
 const float decreaseRate = 1.0;
 
+    ///Position for player 1's power box
 const float plyr2PowerBL[] = {5,8,-57};
 const float plyr2PowerTL[] = {5,8,-52};
 const float plyr2PowerTR[] = {5,13,-52};
 const float plyr2PowerBR[] = {5,13,-57};
 
+    ///Position for player 2's power box
 const float plyr1PowerBL[] = {5,8,-5};
 const float plyr1PowerTL[] = {5,8,-10};
 const float plyr1PowerTR[] = {5,13,-10};
 const float plyr1PowerBR[] = {5,13,-5};
 
+    //Draw player in position (i)
 void drawPlayer(int i, GLdouble colour[]){
 //Draw player (Capsule)
 
@@ -93,6 +93,7 @@ void drawRacket(int i){
 
 }
 
+    ///Animation for player 1's swing
     //Cannot be reused as animation functions can only have void parameter
 void playerOneSwing(void){
 
@@ -129,6 +130,7 @@ void playerOneSwing(void){
     glutPostRedisplay();
 }
 
+    ///Animation for player 2's swing
     //Cannot be reused as animation functions can only have void parameter
 void playerTwoSwing(void){
 
@@ -165,6 +167,8 @@ void playerTwoSwing(void){
     glutPostRedisplay();
 }
 
+    ///Increase/decrease power of swing (used by input manager)
+    //longer key is held the more powerful (decreases if held too long)
 void powerLevelHandler(playerObj *player){
     if(player->swingMode != cooling || player->powerLevel == 1)
             player->swingMode = powering;
@@ -177,6 +181,7 @@ void powerLevelHandler(playerObj *player){
     }
 }
 
+    ///Draw player 2's power indicator in 3D world
 void drawPlayerTwoPower(){
 
     glColor3f(0+playerArray[1].powerLevel/10.0,1-playerArray[1].powerLevel/10.0,0);
@@ -188,6 +193,7 @@ void drawPlayerTwoPower(){
     glEnd();
 }
 
+    ///Draw player 1's power indicator in 3D world
 void drawPlayerOnePower(){
 
     glColor3f(0+playerArray[0].powerLevel/10.0,1-playerArray[0].powerLevel/10.0,0);
@@ -231,6 +237,7 @@ void decreaseSwingSpeed(){
         printf("Swing speed is at minimum: %f\n", swingSpeed);
 }
 
+    ///Move player back to service area (spawn)
 void resetPlayerPos(){
 
     for(int i = 0; i < maxPlayers; i++){

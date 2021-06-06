@@ -1,5 +1,5 @@
-#ifndef COLLISIONDETECTIONAABB_H_INCLUDED
-#define COLLISIONDETECTIONAABB_H_INCLUDED
+#ifndef COLLISIONDETECTIONAABB_H
+#define COLLISIONDETECTIONAABB_H
 #include <GL/freeglut.h>
 
 #include "Geometry.h"
@@ -18,21 +18,21 @@ const int YcollisionBox = 10;
 const int ZcollisionBox = 10;
 
 const int maxFloorBounces = 2;
-//bool hitFrontWall = false;
 
-///Used by display callback function in main
+    ///Used by display callback function in main
 void collisionPlayer(int i, ballObj *b){
 
-        /// getting the position of the racket
+            /// getting the position of the racket
         rackPos[i][0] = startingPos[i][0]  + playerArray[i].CoM[0];
         rackPos[i][1] = playerArray[i].CoM[1];
         rackPos[i][2] = startingPos[i][2] + playerArray[i].CoM[2];
 
-        /// getting the vector between the racket and the ball
+            /// getting the vector between the racket and the ball
         b->vecRackToBall[0] = b->currPos[0] - rackPos[i][0];
         b->vecRackToBall[1] = b->currPos[1] - rackPos[i][1];
         b->vecRackToBall[2] = b->currPos[2] - rackPos[i][2];
-    /// checking if collision has occurred by checking the vector between the ball and racket, and seeing if its within this collision box defined by X,Y and Z value for collisionBox
+
+            /// checking if collision has occurred by checking the vector between the ball and racket, and seeing if its within this collision box defined by X,Y and Z value for collisionBox
      if((b->vecRackToBall[0] <= XcollisionBox && b->vecRackToBall[0] >= -XcollisionBox) && (b->vecRackToBall[1] <= YcollisionBox && b->vecRackToBall[1] >= -YcollisionBox) && (b->vecRackToBall[2] <= ZcollisionBox && b->vecRackToBall[2] >= -ZcollisionBox)  ){
             b->hasHitBall[i] = true;
             resetFloorHitCount(b);
@@ -43,7 +43,7 @@ void collisionPlayer(int i, ballObj *b){
 
 void playerWallCollision(){
 
-    //none of these make any sense until you see how they move
+        ///Based on Center of Mass as that is how the player is moved
     for(int i = 0; i < maxPlayers; i++){
         //back
         if (playerArray[i].CoM[0] > maxPlayerX){
@@ -87,6 +87,7 @@ void checkIfOutOfBounds(ballObj *b){
     b->hitFrontWall = false;
 }
 
+    ///Increase score based on whose turn it is to hit the ball
 void scoreHandler(ballObj *b){
 
     if(b->whoseTurn[0] == true){
@@ -102,10 +103,10 @@ void scoreHandler(ballObj *b){
     if(b->hitFrontWall == false)
         switchPlayerToHit(b);
 
-        resetBall(b);
+        resetBall(b);///Reset ball to 'serve' position & reset physics
 }
 
-    //Change which player is meant to pass the ball
+    ///Change which player is ment to pass the ball
 void switchPlayerToHit(ballObj *b){
 
     if(b->whoseTurn[0] == true){
@@ -116,4 +117,4 @@ void switchPlayerToHit(ballObj *b){
         b->whoseTurn[0] = true;
     }
 }
-#endif // COLLISIONDETECTIONAABB_H_INCLUDED
+#endif // COLLISIONDETECTIONAABB_H

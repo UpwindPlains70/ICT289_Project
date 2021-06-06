@@ -2,77 +2,130 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
+	<File name="include\Geometry.h" open="0" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2472" topLine="55" />
+		</Cursor>
+	</File>
+	<File name="include\scoreDisplay.h" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="480" topLine="0" />
+		</Cursor>
+		<Folding>
+			<Collapse line="28" />
+			<Collapse line="51" />
+			<Collapse line="68" />
+			<Collapse line="84" />
+			<Collapse line="91" />
+			<Collapse line="99" />
+		</Folding>
+	</File>
 	<File name="include\inputManager.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="3683" topLine="45" />
+			<Cursor1 position="2830" topLine="15" />
 		</Cursor>
 		<Folding>
 			<Collapse line="13" />
 			<Collapse line="34" />
-			<Collapse line="53" />
-			<Collapse line="70" />
-			<Collapse line="84" />
-			<Collapse line="99" />
-			<Collapse line="106" />
-			<Collapse line="113" />
-			<Collapse line="120" />
+			<Collapse line="55" />
+			<Collapse line="72" />
+			<Collapse line="119" />
+			<Collapse line="133" />
+			<Collapse line="148" />
+			<Collapse line="155" />
+			<Collapse line="162" />
+			<Collapse line="169" />
 		</Folding>
-	</File>
-	<File name="include\ball.h" open="1" top="1" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1113" topLine="41" />
-		</Cursor>
-	</File>
-	<File name="include\collisionDetectionAABB.h" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1602" topLine="21" />
-		</Cursor>
-	</File>
-	<File name="src\TextureLoader.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="29" topLine="0" />
-		</Cursor>
 	</File>
 	<File name="include\QuitHandler.h" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="236" topLine="0" />
+			<Cursor1 position="315" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="include\Geometry.h" open="0" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="include\menus.h" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="107" topLine="48" />
-		</Cursor>
-	</File>
-	<File name="include\globals.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="608" topLine="15" />
-		</Cursor>
-	</File>
-	<File name="src\ReadOFFfile.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="90" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="include\player.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="478" topLine="8" />
+			<Cursor1 position="5217" topLine="38" />
 		</Cursor>
 		<Folding>
-			<Collapse line="76" />
-			<Collapse line="86" />
-			<Collapse line="96" />
-			<Collapse line="132" />
-			<Collapse line="167" />
+			<Collapse line="30" />
+			<Collapse line="43" />
+			<Collapse line="52" />
+			<Collapse line="88" />
+			<Collapse line="115" />
+			<Collapse line="131" />
+			<Collapse line="148" />
+			<Collapse line="163" />
+			<Collapse line="193" />
 		</Folding>
 	</File>
 	<File name="include\ReadOFFfile.h" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="374" topLine="0" />
+			<Cursor1 position="374" topLine="3" />
 		</Cursor>
 	</File>
-	<File name="main.c" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+	<File name="include\ObjectDisplay.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="2353" topLine="69" />
+			<Cursor1 position="2062" topLine="0" />
+		</Cursor>
+		<Folding>
+			<Collapse line="7" />
+			<Collapse line="35" />
+			<Collapse line="56" />
+		</Folding>
+	</File>
+	<File name="include\physics.h" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="331" topLine="0" />
+		</Cursor>
+		<Folding>
+			<Collapse line="144" />
+			<Collapse line="160" />
+			<Collapse line="168" />
+			<Collapse line="176" />
+		</Folding>
+	</File>
+	<File name="include\globals.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="709" topLine="35" />
+		</Cursor>
+	</File>
+	<File name="include\player.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="7256" topLine="81" />
+		</Cursor>
+		<Folding>
+			<Collapse line="15" />
+			<Collapse line="76" />
+			<Collapse line="86" />
+			<Collapse line="97" />
+			<Collapse line="134" />
+			<Collapse line="171" />
+			<Collapse line="184" />
+			<Collapse line="196" />
+			<Collapse line="207" />
+			<Collapse line="215" />
+			<Collapse line="223" />
+			<Collapse line="231" />
+		</Folding>
+	</File>
+	<File name="main.c" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3967" topLine="125" />
+		</Cursor>
+	</File>
+	<File name="include\ball.h" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2509" topLine="100" />
+		</Cursor>
+	</File>
+	<File name="include\TextureLoader.h" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="257" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\QuitHandler.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="788" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="src\Geometry.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -80,54 +133,39 @@
 			<Cursor1 position="23" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="include\scoreDisplay.h" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\TextureLoader.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="2043" topLine="75" />
+			<Cursor1 position="29" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="include\ObjectDisplay.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="include\collisionDetectionAABB.h" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1498" topLine="28" />
+			<Cursor1 position="3806" topLine="97" />
 		</Cursor>
-	</File>
-	<File name="include\menus.h" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="481" topLine="161" />
-		</Cursor>
-		<Folding>
-			<Collapse line="27" />
-			<Collapse line="39" />
-		</Folding>
 	</File>
 	<File name="include\Room.h" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="32" topLine="9" />
+			<Cursor1 position="2150" topLine="13" />
 		</Cursor>
 		<Folding>
 			<Collapse line="32" />
 		</Folding>
 	</File>
-	<File name="src\QuitHandler.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\ReadOFFfile.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="788" topLine="0" />
+			<Cursor1 position="90" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="include\menusDisplay.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="687" topLine="20" />
+			<Cursor1 position="1234" topLine="42" />
 		</Cursor>
 		<Folding>
-			<Collapse line="87" />
+			<Collapse line="48" />
+			<Collapse line="61" />
+			<Collapse line="93" />
+			<Collapse line="127" />
+			<Collapse line="136" />
 		</Folding>
-	</File>
-	<File name="include\TextureLoader.h" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="74" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="include\physics.h" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="3925" topLine="152" />
-		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

@@ -8,6 +8,7 @@
 const Point3D startPos = {20, 40, -20}; ///Serve pos for player One
 const Point3D startPosB = {20, 40, -50}; ///Serve pos for player Two
 
+    ///Allow for several balls to be created easily
 typedef struct ballObj{
     float ballRadius;
     Point3D vecRackToBall;
@@ -28,8 +29,9 @@ typedef struct ballObj{
 
 }ballObj;
 
-ballObj ballArray[1];
+ballObj ballArray[1];//Only need one ball
 
+    ///Position for text of whose turn it is in 3D world
 const int plyr1PassDisp[] = {5, 50,-5};
 const int plyr2PassDisp[] = {5, 50,-38};
 
@@ -40,6 +42,7 @@ void drawGameBall(ballObj *b){
     glutSolidSphere(b->ballRadius,15,15);
 }
 
+    ///Setup ball parameters
 void resetBall(ballObj *b){
 
     b->ballRadius = 2.5;
@@ -69,8 +72,8 @@ void resetBall(ballObj *b){
     b->currVel[2] = b->prevVel[2] = b->v0[2];
 }
 
-    //Can be modifiead to be random values
-    //For this project preset values are used (only one ball)
+    ///Can be modifiead to use random values
+    ///For this project preset values are used (only one ball)
 void setBallVelocity(ballObj *b){
 
     b->v0[0] = 100;
@@ -78,11 +81,14 @@ void setBallVelocity(ballObj *b){
     b->v0[2] = 0;
 }
 
+    ///Allows for other funtions to reset the count
 void resetFloorHitCount(ballObj *b){
 
     b->floorHitCount = 0;
 }
 
+    ///Hard set ball color (only one ball)
+    ///Could be modified to random values
 void resetBallColor(ballObj *b){
 
     b->ballColor[0] = 0;

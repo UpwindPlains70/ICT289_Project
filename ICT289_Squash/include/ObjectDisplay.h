@@ -4,6 +4,7 @@
 #include "player.h"
 #include "menus.h"
 
+    ///Draw, position players in 3D world
 void positionPlayer(){
     ///----------------------( drawing first character ) ------------------
     glPushMatrix();
@@ -31,6 +32,7 @@ void positionPlayer(){
 
 }
 
+    ///Handle menu drawing and game ball drawing
 void menuHandler(){
     if(optionsMenuActive == true)
         writeOptionsMenuDisplay();
@@ -51,6 +53,7 @@ void menuHandler(){
     }
 }
 
+    ///Draw player power boxes in 3D world
 void drawPowerBox(){
     if(playerArray[1].swingMode == powering || playerArray[1].swingMode == cooling)
     {

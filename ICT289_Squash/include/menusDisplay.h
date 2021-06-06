@@ -16,27 +16,33 @@
 
 const float backgroundColor[] = {0.8, 0.8, 0.8};
 
+    //menu Background coordinates
 const float backgroundBL[] = {10, 8, -10};
 const float backgroundTL[] = {10, 50, -10};
 const float backgroundTR[] = {10, 50, -55};
 const float backgroundBR[] = {10, 8, -55};
 
+    //menu title coordinates
 const int menuTitleDisp[] = {12, 45,-26};
 
+    //Options menu coordinates
 const int speedModDisp[] = {12, 37, -20};
 const int winScoreDisp[] = {12, 22, -20};
 const int swingSpeedDisp[] = {12, 32, -13};
 const int dropOffDisp[] = {12, 27, -17};
 
+    //Help player 1 coordinates
 const int plyr1ControlsTitle[] = {12, 39,-14};
 const int plyr1Movement[] = {12, 35,-16};
 const int plyr1Swing[] = {12, 31,-16};
 
+    //Help player 2 coordinates
 const int plyr2ControlsTitle[] = {12, 25,-14};
 const int plyr2Movement[] = {12, 21,-16};
 const int plyr2MoveKeys[] = {12, 17,-16};
 const int plyr2Swing[] = {12, 13,-16};
 
+    //Position for win text
 const int plyrWinDisp[] = {5, 36,-22};
 
     ///Define menu background

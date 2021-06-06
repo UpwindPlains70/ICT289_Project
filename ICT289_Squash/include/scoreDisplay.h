@@ -25,6 +25,7 @@ const Face3D p2ScorePos = {5, 40,-38};
 const float scoreIncreaseRate = 1.0;
 const float scoreDecreaseRate = 1.0;
 
+    ///Draw scores in 3D world
 void WriteScores(void){
 
     //int to character
@@ -46,6 +47,8 @@ void WriteScores(void){
     glutBitmapCharacter(GLUT_BITMAP_9_BY_15, p2);
 }
 
+    ///Increase player 1's score
+    //End game if max score reached
 void increaseP1Score(){
 
     if(plyr1Score+1 < winScore)
@@ -61,6 +64,8 @@ void increaseP1Score(){
     }
 }
 
+    ///Increase player 2's score
+    //End game if max score reached
 void increaseP2Score(){
 
     if(plyr2Score+1 < winScore)
@@ -76,6 +81,7 @@ void increaseP2Score(){
     }
 }
 
+    ///Reset scoreboard
 void newGame(){
 
     plyr1Score = 0;

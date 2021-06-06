@@ -8,6 +8,8 @@
     #include <GLUT/glut.h>
 #endif
 
+    ///Load a .raw image into GLUT image store
+    //Requires image width, height, and 4
 GLuint LoadTexture(const char * filepath, int width, int height, int byteSize);
 
 #endif // TEXTURELOADER_H

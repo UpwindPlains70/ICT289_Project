@@ -31,24 +31,25 @@ void myinit(void){
     glClearColor(1.0, 1.0, 1.0, 1.0); /* draw on white background */
     glLineWidth(5.0); /* draw using lines 5 pixels wide */
 
-    glEnable(GL_TEXTURE_2D);
+    glEnable(GL_TEXTURE_2D); ///Allow for images to be displayed
     glEnable(GL_BLEND);
 
-    glEnable(GL_LIGHTING);
+    glEnable(GL_LIGHTING); ///Enable lighting
     glEnable(GL_LIGHT0);
 
-    glLightfv(GL_LIGHT0,GL_POSITION,light_position);
+    glLightfv(GL_LIGHT0,GL_POSITION,light_position);///Lighting specified in menu
 
         /* switch matrix mode to 'projection' and
             load an identity matrix as the projection matrix */
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
 
-    gluPerspective(fov, aspect, nearVal, farVal);//*/
+    gluPerspective(fov, aspect, nearVal, farVal);///Setup camera
         /* switch matrix mode back to 'model view' */
     glMatrixMode(GL_MODELVIEW);
 }
 
+    ///Prevent dispropertioned 3D world on window size change
 void reshape (int w, int h){
    glViewport (0, 0, (GLsizei) w, (GLsizei) h);
    glMatrixMode (GL_PROJECTION);
@@ -58,22 +59,24 @@ void reshape (int w, int h){
    glLoadIdentity();
 }
 
+    ///Glut Callback that created everything to do with the 3D world
 void display(void){
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    ///Set camera pos, look at, & up vec
+        ///Set camera pos, look at, & up vec
     gluLookAt(viewer[0], viewer[1], viewer[2],
            viewer[3], viewer[4], viewer[5],
            viewer[6], viewer[7], viewer[8]);
 
-        ///Enable shading from light
+        ///Enable object shading from light
     glEnable(GL_COLOR_MATERIAL);
     glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
 
     glEnable(GL_NORMALIZE);
 
+        ///Show dev pic or 3D world
     if(gameEnding == true){
         LoadImages(); ///Prevents game loading if done in myinit
         DrawGroupCred();
@@ -86,17 +89,21 @@ void display(void){
         if(gameStarted == true)
             writeWhoseTurn();
 
-            ///Show/hide menus
+            ///Show/hide menus & game ball
         menuHandler();
 
+            ///Keep track of applications time
         calcTimeSinceLastFrame();
         setPrevTime();
 
         drawPowerBox();
 
+            ///Placed here as movement is not an animation
+            ///it is a result of a key press
         movePlayerB();
         movePlayerA();
 
+            ///Draws and positions characters
         positionPlayer();
     }
 
@@ -144,10 +151,6 @@ int main(int argc, char** argv){
     glutKeyboardFunc(pressedDown);     /// this function for WASD movement, camera doesn't need to be manipulated by key press, camera can move by itself relative to the position of the ball maybe
     glutKeyboardUpFunc(pressedUp);
 
-    glEnable(GL_TEXTURE_2D);
-    glEnable(GL_BLEND);
-
-    //initPositions();
     createMainMenu(); ///GLUT menus
     glutMainLoop(); /* enter event loop */
 

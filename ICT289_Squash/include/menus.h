@@ -20,23 +20,27 @@
     //Light
 const GLfloat light_position[] = {-28.0, -14.0, -92.0,1};
 
+    //Pre-definition as it is used by all menus
 void processMainMenuEvents(int option);
 
+    //Pre-definition as it is used by all menus
 void createMainMenu();
 
-
+    ///Perform all tasks to start game
+    //Reset ball, gameStarted = true, start physics, reset scoreboard, position light
 void startGame(){
 
     glLightfv(GL_LIGHT0,GL_POSITION,light_position);
     resetPlayerPos();
     resetBall(&ballArray[0]); ///Reset ball positio
-    resetBallColor(&ballArray[0]); ///Reset ball color
+    resetBallColor(&ballArray[0]); ///Reset ball color (only on new game), allows for animation
     initPhysics(); ///Reset physics
     gameStarted = true; ///Allows ball to spawn
     glutTimerFunc(TIMER, physics, 0); ///Ball physics
     newGame(); ///Reset scoreboard
 }
 
+    ///Reset all customizable parameters to their defualt value
 void resetGameSettings(){
 
     speedMod = defaultSpeedMod; ///Reset player speed
@@ -45,6 +49,7 @@ void resetGameSettings(){
     winScore = defaultWinScore;///reset points to win
 }
 
+    ///Handler for option menu events
 void processOptionsEvents(int option){
 
     switch(option)
@@ -80,6 +85,7 @@ void processOptionsEvents(int option){
     }
 }
 
+    ///Create new right click menu for Options
 void optionsMenu(){
 
 	// create the menu and
@@ -106,6 +112,7 @@ void optionsMenu(){
 	glutAttachMenu(GLUT_RIGHT_BUTTON);
 }
 
+    ///Handler for help menu events
 void processHelpEvents(int option){
 
     switch(option)
@@ -121,6 +128,7 @@ void processHelpEvents(int option){
     }
 }
 
+    ///Create new right click menu for help menu
 void helpMenu(){
 
 	// create the menu and
@@ -136,6 +144,8 @@ void helpMenu(){
 	glutAttachMenu(GLUT_RIGHT_BUTTON);
 }
 
+    ///Create quit menu options
+    //uses main menu event handler
 void createQuitMenu(){
 
 	// create the menu and
@@ -150,6 +160,7 @@ void createQuitMenu(){
 	glutAttachMenu(GLUT_RIGHT_BUTTON);
 }
 
+    ///Handler for all main menu events
 void processMainMenuEvents(int option){
 
 	switch (option) {
@@ -178,6 +189,8 @@ void processMainMenuEvents(int option){
 	}
 }
 
+    ///Create/define options for main menu
+    //Changes if game has started (options is no longer available)
 void createMainMenu(){
 
 	// create the menu and

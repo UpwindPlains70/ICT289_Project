@@ -50,10 +50,10 @@ void NormalVector(Point3D v1, Point3D v2, Point3D destination);
 //Magnitude
 double calcNormalLength(Point3D vec);
 
+//Move object to 0,0,0 by taking the centre of mass from the object
 void translateToOrogin(Object3D *obj, Point3D CoM);
 
-void translate3DObject(Object3D *obj, GLfloat x, GLfloat y, GLfloat z);
-
+//Calc max radius of an object
 float calcRadius(Object3D *obj, GLfloat *CoM);
 
 //Calculate center of mass of given object
@@ -61,14 +61,18 @@ float calcRadius(Object3D *obj, GLfloat *CoM);
 //Post-conditions: populates passed Poin3D with center of mass
 void calcCenterOfMass(Object3D obj, Point3D CoM);
 
+//Calculate unit normal vector of 3 points
 void UnitNormalVector(Point3D v1, Point3D v2, Point3D v3, Point3D destination);
 
 void calcUnitNormalVector(Point3D v1, Point3D v2, Point3D destination);
 
+//Allow for a deep copy of a Point3D
 void pointCopy(Point3D source, Point3D *dest);
 
+//Calc the distance from a sphere to a given plane
 double distanceFromSphereToPlane(Point3D sphereCoM, Point3D planeP1, Point3D planeP2, Point3D planeP3);
 
+//Draw object using GLUT
 void draw3DObject(Object3D obj);
 
 #endif // GEOMETRY_H

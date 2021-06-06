@@ -7,18 +7,20 @@
     #include <GLUT/glut.h>
 #endif
 
-#define TIMER 4 //Physics call speed
-#define TIMERMSECSA 50 //swing anim call speed P1
-#define TIMERMSECSB 55 //swing anim call speed P2
+#define TIMER 5 //Physics call frequency
+#define TIMERMSECSA 50 //swing anim call frequency P1
+#define TIMERMSECSB 55 //swing anim call frequency P2
 
-//animation timers
+    ///Global animation timers
 float startTime, prevTime;
 float currTime;
 float timeSincePrevFrame;
 
 int menu;
 
+    ///Used by menuDisplay
 static char label[100];
+
 typedef enum {false, true} bool;
 
 const float textColor[] = {0.0, 0.0, 0.0};
@@ -27,6 +29,7 @@ bool helpMenuActive = false;
 bool gameStarted = false;
 bool gameEnding = false;
 
+    ///Prints contents of 'label' typically
 void drawString (char *s){
 
   unsigned int i;
