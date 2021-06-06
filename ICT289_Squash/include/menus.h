@@ -115,17 +115,18 @@ void optionsMenu(){
     ///Handler for help menu events
 void processHelpEvents(int option){
 
-    switch(option)
-    {
+    switch(option){
+
     case 1:
         helpMenuActive = false;
         startGame();
         break;
     case 2:
         helpMenuActive = false;
-        createMainMenu();
         break;
     }
+
+    createMainMenu();
 }
 
     ///Create new right click menu for help menu
@@ -136,7 +137,9 @@ void helpMenu(){
 	// handle the events
 	menu = glutCreateMenu(processHelpEvents); ///Only uses the main menu option
 
-	glutAddMenuEntry("Start Game",2);
+	if(gameStarted == false)
+        glutAddMenuEntry("Start Game",1);
+
 	glutAddMenuEntry("Main Menu",2);
 
 	//writeOptionsMenuDisplay();

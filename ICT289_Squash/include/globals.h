@@ -7,7 +7,7 @@
     #include <GLUT/glut.h>
 #endif
 
-#define TIMER 5 //Physics call frequency
+#define TIMER 4 //Physics call frequency
 #define TIMERMSECSA 50 //swing anim call frequency P1
 #define TIMERMSECSB 55 //swing anim call frequency P2
 

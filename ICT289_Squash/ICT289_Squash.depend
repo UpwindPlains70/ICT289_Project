@@ -609,7 +609,7 @@
 	"Geometry.h"
 	"globals.h"
 
-1622943984 c:\users\peter\documents\github\ict289_project\ict289_squash\include\menus.h
+1622953844 c:\users\peter\documents\github\ict289_project\ict289_squash\include\menus.h
 	<GL/freeglut.h>
 	<GLUT/glut.h>
 	"scoreDisplay.h"
@@ -678,7 +678,7 @@
 	"player.h"
 	"menus.h"
 
-1622943277 c:\users\peter\documents\github\ict289_project\ict289_squash\include\globals.h
+1622953573 c:\users\peter\documents\github\ict289_project\ict289_squash\include\globals.h
 	<GL/freeglut.h>
 	<GLUT/glut.h>
 
